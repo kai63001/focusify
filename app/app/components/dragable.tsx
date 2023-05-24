@@ -1,16 +1,16 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import ReactDOM from "react-dom";
 import Draggable from "react-draggable";
 
 const Dragable = (props: any) => {
+  const [windowWidth, setWindowWidth] = React.useState(1);
+  const [windowHeight, setWindowHeight] = React.useState(1);
+
+
   return (
     <Draggable
       handle=".handle"
-      defaultPosition={{
-        x: window?.innerWidth / 2 - 100,
-        y: window?.innerHeight / 2 - 100,
-      }}
       bounds="parent"
     >
       <div className="z-50 absolute">{props.children}</div>

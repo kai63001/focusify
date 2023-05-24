@@ -1,10 +1,12 @@
-import Image from "next/image";
 import Dragable from "./components/dragable";
+import ToDoRightToggleMenu from "./components/menu/rightToggle/toggle";
 import TodoListMain from "./components/todoList/main";
 
 const AppFocusPage = () => {
   return (
     <div className="w-screen h-screen relative">
+      {/* right */}
+      <ToDoRightToggleMenu />
       {/* dragable */}
       <div className="w-screen h-screen">
         <Dragable>
