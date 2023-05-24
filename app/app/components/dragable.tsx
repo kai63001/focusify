@@ -8,8 +8,8 @@ const Dragable = (props: any) => {
     <Draggable
       handle=".handle"
       defaultPosition={{
-        x: window.innerWidth / 2 - 100,
-        y: window.innerHeight / 2 - 100,
+        x: window?.innerWidth / 2 - 100,
+        y: window?.innerHeight / 2 - 100,
       }}
       bounds="parent"
     >

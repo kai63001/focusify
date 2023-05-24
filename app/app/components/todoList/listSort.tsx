@@ -19,7 +19,7 @@ import { ToDoSortableItem } from "./Item";
 
 
 const ToDoListSort = () => {
-    const [items, setItems] = useState([1, 2, 3]);
+    const [items, setItems]:any = useState([1, 2, 3]);
   const sensors = useSensors(
     useSensor(PointerSensor),
     useSensor(KeyboardSensor, {
@@ -31,7 +31,7 @@ const ToDoListSort = () => {
     const {active, over} = event;
     
     if (active.id !== over.id) {
-      setItems((items) => {
+      setItems((items:any) => {
         const oldIndex = items.indexOf(active.id);
         const newIndex = items.indexOf(over.id);
         
@@ -49,7 +49,8 @@ const ToDoListSort = () => {
         items={items}
         strategy={verticalListSortingStrategy}
       >
-        {items.map(id => <ToDoSortableItem key={id} id={id} />)}
+        {items.length === 0 && <p className="text-[#eaeaea] text-center">No items</p>}
+        {items.map((id:any) => <ToDoSortableItem key={id} id={id} />)}
       </SortableContext>
     </DndContext>
   );
