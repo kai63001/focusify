@@ -1,17 +1,13 @@
 import Image from "next/image";
-import { Client, Account } from "appwrite";
+import appwrite from "@/app/hook/appwrite";
 
 const LoginModal = () => {
-  const client = new Client()
-    .setEndpoint(process.env.NEXT_PUBLIC_ENDPOINT as string) // Your API Endpoint
-    .setProject(process.env.NEXT_PUBLIC_PROJECT as string);
-
-  const account = new Account(client);
-
+  const { account, client } = appwrite();
 
   const continueWithGoogle = () => {
     const origin = window.location.origin;
-    account.createOAuth2Session('google', `${origin}/app`);
+    if (!account) return;
+    account.createOAuth2Session("google", `${origin}/auth/success`, `${origin}/auth/error`);
   };
 
   return (
@@ -37,11 +33,12 @@ const LoginModal = () => {
 
         <div className="google py-5">
           {/* login with google */}
-          <button onClick={continueWithGoogle} className="w-8/12 bg-blue-500 py-2 rounded-md relative">
-          <i className="fi fi-brands-google absolute mt-0.5 pr-10"></i>
-          <span className="ml-7">
-             Continue with google
-            </span>
+          <button
+            onClick={continueWithGoogle}
+            className="w-8/12 bg-blue-500 py-2 rounded-md relative"
+          >
+            <i className="fi fi-brands-google absolute mt-0.5 pr-10"></i>
+            <span className="ml-7">Continue with google</span>
           </button>
         </div>
       </div>

@@ -4,10 +4,12 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 export interface LoginState {
     openModal: boolean;
+    name?: string;
 }
 
 const initialState: LoginState = {
-    openModal: false
+    openModal: false,
+    name: ''
 }
 
 export const loginSlice = createSlice({
@@ -15,8 +17,7 @@ export const loginSlice = createSlice({
     initialState,
     reducers: {
         setLoginModal: (state, action:PayloadAction<LoginState>) => {
-            state.openModal = action.payload.openModal;
-            console.log('loginSlice: setLoginModal: state: ', state)
+            return action.payload
         }
     }
 })
