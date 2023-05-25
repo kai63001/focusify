@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
@@ -13,7 +14,7 @@ export function ToDoSortableItem(props: any) {
   };
 
   return (
-    <div style={style} >
+    <div style={style}>
       <div className="bg-primary rounded-md px-3 py-2 flex items-start mb-2 select-none">
         <ToDoCheckBox />
         <div className="flex-1">
@@ -34,3 +35,5 @@ export function ToDoSortableItem(props: any) {
     </div>
   );
 }
+
+export default ToDoSortableItem;

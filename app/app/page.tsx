@@ -1,6 +1,15 @@
-import Dragable from "./components/dragable";
-import MainList from "./components/menu/mainList";
-import TodoListMain from "./components/todoList/main";
+import dynamic from "next/dynamic";
+
+const Dragable = dynamic(() => import("./components/dragable"), {
+  ssr: false,
+});
+const MainList = dynamic(() => import("./components/menu/mainList"), {
+  ssr: false,
+});
+const TodoListMain = dynamic(() => import("./components/todoList/main"), {
+  ssr: false,
+});
+
 
 const AppFocusPage = () => {
   return (

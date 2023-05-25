@@ -15,7 +15,11 @@ import {
     verticalListSortingStrategy,
   } from '@dnd-kit/sortable';
 import { useState } from "react";
-import { ToDoSortableItem } from "./Item";
+
+import dynamic from 'next/dynamic';
+const ToDoSortableItem = dynamic(() => import('./Item'), {
+  ssr: false
+})
 
 
 const ToDoListSort = () => {
