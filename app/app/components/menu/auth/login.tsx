@@ -13,7 +13,7 @@ const LoginButton = () => {
   }
 
   return (
-    <div onClick={handleLogin} className="bg-primary px-5 h-8 rounded-md flex cursor-pointer">
+    <div onClick={handleLogin} className="bg-primary bg-opacity-75 backdrop-blur-xl px-5 h-8 rounded-md flex cursor-pointer">
       <div className="m-auto">Login</div>
     </div>
   );

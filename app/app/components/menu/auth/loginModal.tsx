@@ -15,7 +15,7 @@ const LoginModal = () => {
   };
 
   return (
-    <div className="bg-primaryDark py-5 md:w-[700px] mx-10 mt-10 rounded-lg">
+    <div className="bg-primaryDark opacity-95 py-5 md:w-[700px] mx-10 mt-10 rounded-lg">
       {/* header */}
       <div className="text-center">
         <div className="flex justify-center mb-2">
@@ -37,8 +37,11 @@ const LoginModal = () => {
 
         <div className="google py-5">
           {/* login with google */}
-          <button onClick={continueWithGoogle} className="w-8/12 bg-blue-500 py-2 rounded-md">
-            Continue with google
+          <button onClick={continueWithGoogle} className="w-8/12 bg-blue-500 py-2 rounded-md relative">
+          <i className="fi fi-brands-google absolute mt-0.5 pr-10"></i>
+          <span className="ml-7">
+             Continue with google
+            </span>
           </button>
         </div>
       </div>
