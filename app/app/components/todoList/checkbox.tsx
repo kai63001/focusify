@@ -6,7 +6,7 @@ const ToDoCheckBox = () => {
   if (checked) {
     return (
       <div
-        className="bg-[#292929] w-4 h-4 rounded-sm mr-2 mt-1 flex justify-center items-center cursor-pointer"
+        className="bg-primary w-4 h-4 rounded-sm mr-2 mt-1 flex justify-center items-center cursor-pointer"
         onClick={() => setChecked(!checked)}
       >
         <i className="fi fi-br-check text-[#eaeaea] text-xs pt-1"></i>

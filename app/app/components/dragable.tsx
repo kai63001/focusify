@@ -13,7 +13,7 @@ const Dragable = (props: any) => {
       handle=".handle"
       bounds="parent"
     >
-      <div className="z-50 absolute">{props.children}</div>
+      <div className="absolute" style={{zIndex: 10}}>{props.children}</div>
     </Draggable>
   );
 };
