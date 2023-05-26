@@ -2,10 +2,10 @@ import ToDoListSort from "./listSort";
 
 const TodoListMain = () => {
   return (
-    <div className="bg-primary border border-primaryLight bg-opacity-75 backdrop-blur-xl rounded-md text-sm w-[450px]">
+    <div className="bg-primary border border-primaryLight rounded-md text-sm w-[450px]">
       <div className="flex justify-between">
         <div className="px-5 pt-4 pb-2 items-center flex space-x-2">
-          <i className="fi fi-bs-window-minimize cursor-pointer"></i>
+          <i className="fi fi-rr-horizontal-rule cursor-pointer"></i>
           <i className="fi fi-bs-arrow-up-right-and-arrow-down-left-from-center cursor-pointer"></i>
         </div>
         <div className="w-full cursor-grab handle"></div>
