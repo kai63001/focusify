@@ -18,9 +18,11 @@ const AddTask = () => {
 
   const [showAddTask, setShowAddTask] = useState(false);
   const [showAddTaskDate, setShowAddTaskDate] = useState(false);
+  const [showAddDescription, setShowAddDescription] = useState(false);
 
   const [inputTask, setInputTask] = useState("");
   const [inputDate, setInputDate] = useState(new Date());
+  const [inputDescription, setInputDescription] = useState("");
 
   const handleCancel = () => {
     //check if input is not empty alert
@@ -45,6 +47,7 @@ const AddTask = () => {
         content: inputTask,
         //check if date is not empty
         endDate: showAddTaskDate ? inputDate : null,
+        description: showAddDescription ? inputDescription : null,
       }
     );
     if (result) {
@@ -69,6 +72,7 @@ const AddTask = () => {
     setShowAddTask(false);
     setShowAddTaskDate(false);
     setInputDate(new Date());
+    setShowAddDescription(false);
   };
 
   return (
@@ -106,8 +110,16 @@ const AddTask = () => {
               value={inputDate}
             />
           )}
+          {showAddDescription && (
+            <textarea
+              className="border-0 outline-none w-full py-2 bg-transparent text-lg"
+              placeholder="Add description"
+              onChange={(e) => setInputDescription(e.target.value)}
+            ></textarea>
+          )}
+
           <div className="flex justify-between space-x-1 mt-2 select-none">
-            <div className="flex items-center sapce-x-3">
+            <div className="flex items-center space-x-3">
               {!showAddTaskDate && (
                 <motion.div
                   className="box"
@@ -118,6 +130,19 @@ const AddTask = () => {
                   <i
                     className="fi fi-sr-calendar cursor-pointer"
                     onClick={() => setShowAddTaskDate(true)}
+                  ></i>
+                </motion.div>
+              )}
+              {!showAddDescription && (
+                <motion.div
+                  className="box"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                >
+                  <i
+                    className="fi fi-sr-notebook cursor-pointer"
+                    onClick={() => setShowAddDescription(true)}
                   ></i>
                 </motion.div>
               )}
