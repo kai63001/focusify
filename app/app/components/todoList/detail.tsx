@@ -1,6 +1,10 @@
 import useAppwrite from "@/app/hook/appwrite";
 import { useAppDispatch, useAppSelector } from "@/app/redux/hook";
-import { selectTaskList, setTasks } from "@/app/redux/slice/task.slice";
+import {
+  selectTaskList,
+  setSelectedTaskData,
+  setTasks,
+} from "@/app/redux/slice/task.slice";
 import { DatabaseId, CollectionId } from "@/libs/database";
 import { Query } from "appwrite";
 import { motion } from "framer-motion";
@@ -34,6 +38,7 @@ const ToDoDetail = () => {
       function (response: any) {
         console.log("response", response);
         setDetail(response);
+        dispatch(setSelectedTaskData(response));
       },
       function (error: any) {
         console.log(error);
@@ -109,7 +114,7 @@ const ToDoDetail = () => {
               <tbody>
                 {detail.endDate && (
                   <tr>
-                    <td className="px-2 py-1 text-gray-300">Date</td>
+                    <td className="py-1 text-gray-300">Date</td>
                     <td className="px-2 py-1">
                       <DatePreview
                         className="cursor-pointer"
@@ -121,7 +126,7 @@ const ToDoDetail = () => {
                 )}
                 {/* status */}
                 <tr>
-                  <td className="px-2 py-1 text-gray-300">Status</td>
+                  <td className="py-1 text-gray-300">Status</td>
                   <td className="px-2 py-1">
                     <span className="text-xs text-white bg-primaryLight rounded-md px-2 py-1">
                       PENDDING

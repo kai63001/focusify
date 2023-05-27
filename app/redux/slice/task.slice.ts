@@ -3,6 +3,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 interface TaskState {
   tasks: any[];
   selectedTask: any;
+  selectedTaskData: any;
 }
 
 interface Task {
@@ -12,6 +13,7 @@ interface Task {
 const initialState: TaskState = {
   tasks: [],
   selectedTask: "",
+  selectedTaskData: {},
 };
 
 export const taskSlice = createSlice({
@@ -30,9 +32,18 @@ export const taskSlice = createSlice({
     selectTaskList: (state, action: PayloadAction<any>) => {
       state.selectedTask = action.payload;
     },
+    setSelectedTaskData: (state, action: PayloadAction<any>) => {
+      state.selectedTaskData = action.payload;
+    },
   },
 });
 
-export const { addTask, removeTask, setTasks, selectTaskList } = taskSlice.actions;
+export const {
+  addTask,
+  removeTask,
+  setTasks,
+  selectTaskList,
+  setSelectedTaskData,
+} = taskSlice.actions;
 
 export default taskSlice.reducer;

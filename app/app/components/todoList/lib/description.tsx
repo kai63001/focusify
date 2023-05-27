@@ -1,6 +1,38 @@
+import useAppwrite from "@/app/hook/appwrite";
+import { useAppSelector } from "@/app/redux/hook";
+import { DatabaseId, CollectionId } from "@/libs/database";
 import { motion } from "framer-motion";
+import { useState } from "react";
 
 const ToDoDetailDescription = ({ description }: { description: string }) => {
+  const selectedTask = useAppSelector((state) => state.task.selectedTask);
+  const { databases } = useAppwrite();
+  const [newDescription, setDescription] = useState<string>("");
+
+  const handleDescription = (e: any) => {
+    setDescription(e.target.value);
+  };
+
+  const handleSave = () => {
+    console.log("handleSave");
+    if (!databases) return;
+    const result = databases?.updateDocument(
+      DatabaseId.focusifyApp,
+      CollectionId.task,
+      selectedTask,
+      {
+        description: newDescription,
+      }
+    );
+    result
+      .then(function (response: any) {
+        console.log(response);
+      })
+      .catch(function (error: any) {
+        console.log(error);
+      });
+  };
+
   return (
     <>
       <div className="bg-primaryLight rounded-md p-3 text-md">
@@ -9,19 +41,22 @@ const ToDoDetailDescription = ({ description }: { description: string }) => {
           className="w-full h-full bg-transparent resize-none outline-none"
           placeholder="Add a more detailed description..."
           defaultValue={description}
+          onChange={handleDescription}
           rows={4}
           id="description"
         ></textarea>
-        <label htmlFor="description" className="flex w-full justify-end cursor-text">
+        <label
+          htmlFor="description"
+          className="flex w-full justify-end cursor-text"
+        >
           <motion.div
             className="box select-none "
             whileHover={{ scale: 1.2 }}
             whileTap={{ scale: 0.9 }}
+            onClick={handleSave}
             transition={{ type: "spring", stiffness: 400, damping: 17 }}
           >
-            <button
-              className="bg-primary px-5 py-2 rounded-md cursor-pointer"
-            >
+            <button className="bg-primary px-5 py-2 rounded-md cursor-pointer">
               Save
             </button>
           </motion.div>
