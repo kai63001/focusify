@@ -13,28 +13,37 @@ const ToDoCheckBox = ({ id }: any) => {
   const { databases } = useAppwrite();
   const dispatch = useAppDispatch();
   const [checked, setChecked] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
   const handleChecked = (check: boolean) => {
+    if (isLoaded) return;
     setChecked(check);
     if (check) {
+      setIsLoaded(true);
       dispatch(setCheckedId(id));
-      setTimeout(() => {
-        //remove this task from db
-        if (!databases && !check) return;
-        const result: any = databases?.deleteDocument(
-          DatabaseId.focusifyApp,
-          CollectionId.task,
-          id
-        );
-        result
-          .then(function (response: any) {
-            //remove allTask by id
-            console.log("response", response);
-            dispatch(removeTaskById(id));
-          })
-          .catch(function (error: any) {
-            console.log(error);
-          });
-      }, 500);
+      //remove this task from db
+      if (!databases && !check) return;
+      // update task set onTask = 1
+      // onTask = 1 mean this task is on completed list
+      // onTask = 0 mean this task is on todo list
+      // onTask feature is not implement yet
+      const result:any = databases?.updateDocument(
+        DatabaseId.focusifyApp,
+        CollectionId.task,
+        id,
+        {
+          onTask: 1,
+        }
+      );
+
+      result
+        .then(function (response: any) {
+          //remove allTask by id
+          dispatch(removeTaskById(id));
+          setIsLoaded(false);
+        })
+        .catch(function (error: any) {
+          console.log(error);
+        });
     } else {
       dispatch(removeCheckedId(id));
     }

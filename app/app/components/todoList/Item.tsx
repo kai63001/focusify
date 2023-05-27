@@ -47,6 +47,7 @@ export function ToDoSortableItem(props: any) {
           </p>
           {props.data.endDate && <DatePreview date={props.data.endDate} />}
         </div>
+        {/* dragable widget move this */}
         <div
           className="items-center cursor-grab m-auto hover:bg-[#2a2a2a] px-2 pt-1 rounded-md"
           ref={setNodeRef}

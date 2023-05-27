@@ -6,7 +6,6 @@ import {
   setTasks,
 } from "@/app/redux/slice/task.slice";
 import { DatabaseId, CollectionId } from "@/libs/database";
-import { Query } from "appwrite";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import DatePreview from "./lib/datePreview";

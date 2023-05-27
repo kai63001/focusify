@@ -22,6 +22,7 @@ import { DatabaseId, CollectionId } from "@/libs/database";
 import { useAppDispatch, useAppSelector } from "@/app/redux/hook";
 import { setTasks } from "@/app/redux/slice/task.slice";
 import { motion } from "framer-motion";
+import { Query } from "appwrite";
 
 const ToDoSortableItem = dynamic(() => import("./Item"), {
   ssr: false,
@@ -51,7 +52,10 @@ const ToDoListSort = () => {
     const result = databases?.listDocuments(
       DatabaseId.focusifyApp,
       CollectionId.task,
-      []
+      [
+        // query onTask == 0 only
+        Query.equal("onTask", 0),
+      ]
     );
     result.then(
       function (response: any) {

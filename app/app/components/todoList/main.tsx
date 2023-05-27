@@ -13,6 +13,14 @@ const AddTask = dynamic(() => import("./addTask"), {
 
 const TodoListMain = () => {
   const selectedTask = useAppSelector((state) => state.task.selectedTask);
+  const checkLogin = () => {
+    const accountData = localStorage.getItem("accountData");
+    if (accountData) {
+      return false;
+    }
+    return true;
+  };
+  // if click task then show detail
   if (selectedTask != "") {
     return <ToDoDetail />;
   }
@@ -26,6 +34,16 @@ const TodoListMain = () => {
         damping: 20,
       }}
     >
+      {checkLogin() && (
+        <div className="absolute w-full h-full bg-black bg-opacity-25 backdrop-blur-lg rounded-md handle flex">
+          <div className="m-auto">
+            {/* need login first */}
+            <p className="text-white text-center">
+              Please login to use this feature
+            </p>
+          </div>
+        </div>
+      )}
       <div className="bg-primary border border-primaryLight rounded-md text-sm w-[450px]">
         <div className="flex justify-between">
           <div className="px-5 pt-4 pb-2 items-center flex space-x-2">
