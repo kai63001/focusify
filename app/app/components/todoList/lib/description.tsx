@@ -4,8 +4,11 @@ import { DatabaseId, CollectionId } from "@/libs/database";
 import { motion } from "framer-motion";
 import { useState } from "react";
 
-const ToDoDetailDescription = ({ description }: { description: string }) => {
+const ToDoDetailDescription = () => {
   const selectedTask = useAppSelector((state) => state.task.selectedTask);
+  const selectedTaskData = useAppSelector(
+    (state) => state.task.selectedTaskData
+  );
   const { databases } = useAppwrite();
   const [newDescription, setDescription] = useState<string>("");
 
@@ -40,7 +43,7 @@ const ToDoDetailDescription = ({ description }: { description: string }) => {
         <textarea
           className="w-full h-full bg-transparent resize-none outline-none"
           placeholder="Add a more detailed description..."
-          defaultValue={description}
+          defaultValue={selectedTaskData?.description}
           onChange={handleDescription}
           rows={4}
           id="description"

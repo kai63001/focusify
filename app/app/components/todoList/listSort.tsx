@@ -21,6 +21,7 @@ import useAppwrite from "@/app/hook/appwrite";
 import { DatabaseId, CollectionId } from "@/libs/database";
 import { useAppDispatch, useAppSelector } from "@/app/redux/hook";
 import { setTasks } from "@/app/redux/slice/task.slice";
+import { motion } from "framer-motion";
 
 const ToDoSortableItem = dynamic(() => import("./Item"), {
   ssr: false,
@@ -29,7 +30,7 @@ const ToDoSortableItem = dynamic(() => import("./Item"), {
 const ToDoListSort = () => {
   const { databases } = useAppwrite();
   const dispatch = useAppDispatch();
-  const allTask:any = useAppSelector((state) => state.task);
+  const allTask: any = useAppSelector((state) => state.task);
   const [items, setItems]: any = useState([]);
   const sensors = useSensors(
     useSensor(PointerSensor),
@@ -41,35 +42,31 @@ const ToDoListSort = () => {
   //useEffect check allTask if change then update items
   useEffect(() => {
     if (allTask.tasks.length === 0) return;
-    console.log("allTask", allTask)
-    setItems(allTask.tasks)
-    
-  }
-  , [allTask]);
-
+    console.log("allTask", allTask);
+    setItems(allTask.tasks);
+  }, [allTask]);
 
   useEffect(() => {
     if (!databases) return;
     const result = databases?.listDocuments(
       DatabaseId.focusifyApp,
       CollectionId.task,
-      [],
-      
+      []
     );
     result.then(
       function (response: any) {
         //add id to items runing number from 0
         response.documents.forEach((item: any, index: number) => {
-          item.id = index + 1;  
+          item.id = index + 1;
         });
         setItems(response.documents);
-        dispatch(setTasks(response.documents))
+        dispatch(setTasks(response.documents));
       },
       function (error: any) {
         console.log(error);
       }
     );
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [databases]);
 
   function handleDragEnd(event: any) {
@@ -83,6 +80,24 @@ const ToDoListSort = () => {
       });
     }
   }
+
+  const variants = {
+    open: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        y: { stiffness: 1000, velocity: -100 },
+      },
+    },
+    closed: {
+      y: 50,
+      opacity: 0,
+      transition: {
+        y: { stiffness: 1000 },
+      },
+    },
+  };
+
   return (
     <DndContext
       sensors={sensors}
@@ -94,7 +109,16 @@ const ToDoListSort = () => {
           <p className="text-[#eaeaea] text-center">No items</p>
         )}
         {items.map((data: any, index: number) => (
-          <ToDoSortableItem data={data} key={data.id} id={data.id} />
+          <motion.div
+            variants={variants}
+            initial="closed"
+            animate="open"
+            exit={{ opacity: 0, scale: 0.95, transition: { duration: 0.2 } }}
+            transition={{ type: "spring", stiffness: 400, damping: 17 }}
+            key={index}
+          >
+            <ToDoSortableItem data={data} key={data.id} id={data.id} />
+          </motion.div>
         ))}
       </SortableContext>
     </DndContext>

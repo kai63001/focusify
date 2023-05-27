@@ -24,6 +24,7 @@ const ToDoDetail = () => {
 
   const backToMain = () => {
     dispatch(selectTaskList(""));
+    dispatch(setSelectedTaskData({}));
   };
 
   //useEffect get data from db

@@ -38,9 +38,7 @@ const TabBar = () => {
             transition={{ duration: 0.2 }}
           >
             {selectedTab.label == "Description" ? (
-              <ToDoDetailDescription
-                description={"should go to the toilet first"}
-              />
+              <ToDoDetailDescription />
             ) : (
               "😋"
             )}

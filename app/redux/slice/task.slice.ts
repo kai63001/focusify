@@ -4,6 +4,7 @@ interface TaskState {
   tasks: any[];
   selectedTask: any;
   selectedTaskData: any;
+  checkedId: any[];
 }
 
 interface Task {
@@ -14,6 +15,7 @@ const initialState: TaskState = {
   tasks: [],
   selectedTask: "",
   selectedTaskData: {},
+  checkedId: [],
 };
 
 export const taskSlice = createSlice({
@@ -26,6 +28,9 @@ export const taskSlice = createSlice({
     removeTask: (state, action: PayloadAction<number>) => {
       state.tasks.splice(action.payload, 1);
     },
+    removeTaskById: (state, action: PayloadAction<number>) => {
+      state.tasks = state.tasks.filter((task) => task.$id !== action.payload);
+    },
     setTasks: (state, action: PayloadAction<any>) => {
       state.tasks = action.payload;
     },
@@ -35,6 +40,16 @@ export const taskSlice = createSlice({
     setSelectedTaskData: (state, action: PayloadAction<any>) => {
       state.selectedTaskData = action.payload;
     },
+    setCheckedId: (state, action: PayloadAction<any>) => {
+      state.checkedId.push(action.payload);
+    },
+    removeCheckedId: (state, action: PayloadAction<any>) => {
+      //remove checked id from array by finding index
+      const index = state.checkedId.indexOf(action.payload);
+      if (index > -1) {
+        state.checkedId.splice(index, 1);
+      }
+    }
   },
 });
 
@@ -44,6 +59,9 @@ export const {
   setTasks,
   selectTaskList,
   setSelectedTaskData,
+  setCheckedId,
+  removeCheckedId,
+  removeTaskById
 } = taskSlice.actions;
 
 export default taskSlice.reducer;

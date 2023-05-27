@@ -4,11 +4,12 @@ import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import ToDoCheckBox from "./checkbox";
 import DatePreview from "./lib/datePreview";
-import { useAppDispatch } from "@/app/redux/hook";
+import { useAppDispatch, useAppSelector } from "@/app/redux/hook";
 import { selectTaskList } from "@/app/redux/slice/task.slice";
 
 export function ToDoSortableItem(props: any) {
   const dispatch = useAppDispatch();
+  const checkedId = useAppSelector((state) => state.task.checkedId);
   const { attributes, listeners, setNodeRef, transform, transition } =
     useSortable({ id: ~~props.id });
 
@@ -22,14 +23,25 @@ export function ToDoSortableItem(props: any) {
     dispatch(selectTaskList(props.data.$id));
   };
 
+  const timeWasPassed = () => {
+    const now = new Date();
+    if (!props.data.endDate) return false;
+    const endDate = new Date(props.data.endDate);
+    return endDate < now;
+  };
+
   return (
     <div style={style}>
       <div className="bg-primary rounded-md px-3 py-2 flex items-start mb-2 select-none">
-        <ToDoCheckBox />
-        <div className="flex-1">
+        <ToDoCheckBox id={props.data.$id} />
+        <div className={`flex-1 `}>
           <p
             onClick={selectTask}
-            className="text-[#eaeaea] font-bold text-md cursor-pointer"
+            className={`${
+              timeWasPassed() ? "text-red-500" : "text-[#eaeaea]"
+            } font-bold text-md cursor-pointer ${
+              checkedId.indexOf(props.data.$id) >= 0 && "line-through"
+            }`}
           >
             {props.data.content}
           </p>
