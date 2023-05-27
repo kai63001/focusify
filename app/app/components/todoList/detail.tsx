@@ -7,10 +7,14 @@ import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import DatePreview from "./lib/datePreview";
 import TabBar from "./lib/tabBar";
+import { useAlert } from "@/app/hook/AlertContext";
 
 const ToDoDetail = () => {
+  const { openAlert }: any = useAlert();
+
   const { databases } = useAppwrite();
   const selectedTask = useAppSelector((state) => state.task.selectedTask);
+  const allTask = useAppSelector((state) => state.task);
   const dispatch = useAppDispatch();
   const [detail, setDetail] = useState<any>({});
 
@@ -30,13 +34,41 @@ const ToDoDetail = () => {
       function (response: any) {
         console.log("response", response);
         setDetail(response);
-        //add id to items runing number from 0
       },
       function (error: any) {
         console.log(error);
       }
     );
   }, [databases, dispatch, selectedTask]);
+
+  const deleteTask = () => {
+    openAlert(
+      "Are you sure you want to delete this task?",
+      () => console.log("Cancel"),
+      () => {
+        console.log("Delete");
+        if (!databases) return;
+        const result = databases?.deleteDocument(
+          DatabaseId.focusifyApp,
+          CollectionId.task,
+          selectedTask
+        );
+        result
+          .then(function (response: any) {
+            console.log("response", response);
+            //remove allTask by id
+            const newTask = allTask.tasks.filter(
+              (item: any) => item.$id !== selectedTask
+            );
+            dispatch(setTasks(newTask));
+            backToMain();
+          })
+          .catch((error: any) => {
+            console.log(error);
+          });
+      }
+    );
+  };
 
   return (
     <motion.div
@@ -59,6 +91,10 @@ const ToDoDetail = () => {
           </div>
           <div className="w-full cursor-grab handle"></div>
           <div className="px-5 pt-4 pb-2 flex items-center space-x-2">
+            <i
+              onClick={deleteTask}
+              className="fi fi-sr-trash cursor-pointer"
+            ></i>
             <i className="fi fi-br-menu-dots-vertical cursor-pointer"></i>
           </div>
         </div>

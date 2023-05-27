@@ -1,7 +1,8 @@
 import "./globals.scss";
 import { Inter } from "next/font/google";
 import { Providers } from "./redux/provider";
-
+import { AlertProvider } from "./hook/AlertContext";
+import MotionAlert from "./hook/MotionAlert";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -17,7 +18,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body suppressHydrationWarning={true} className={inter.className}>
-        <Providers>{children}</Providers>
+        <AlertProvider>
+          <Providers>{children}</Providers>
+          <MotionAlert />
+        </AlertProvider>
       </body>
     </html>
   );
