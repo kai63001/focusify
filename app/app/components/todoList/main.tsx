@@ -23,7 +23,7 @@ const TodoListMain = () => {
           <i className="fi fi-br-menu-dots-vertical cursor-pointer"></i>
         </div>
       </div>
-      <div id="detail" className="px-5 py-2">
+      <div id="detail" className="px-5 py-2 overflow-scroll max-h-96 overflow-x-hidden no-scrollbar">
         <p className="mb-2">To-Do List</p>
         <ToDoListSort />
         <AddTask />

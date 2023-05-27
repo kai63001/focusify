@@ -73,7 +73,7 @@ const AddTask = () => {
           initial={{ opacity: 0, scale: 1 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{
-            duration: 2,
+            duration: 5,
             delay: 0,
             ease: [0, 0.71, 0.2, 1.01],
           }}
@@ -89,12 +89,19 @@ const AddTask = () => {
             <div onClick={handleCancel} className="px-5 py-2 cursor-pointer">
               Cancel
             </div>
-            <div
-              onClick={handleSave}
-              className="bg-primary px-5 py-2 rounded-md cursor-pointer"
+            <motion.div
+              className="box"
+              whileHover={{ scale: 1.2 }}
+              whileTap={{ scale: 0.9 }}
+              transition={{ type: "spring", stiffness: 400, damping: 17 }}
             >
-              Save
-            </div>
+              <div
+                onClick={handleSave}
+                className="bg-primary px-5 py-2 rounded-md cursor-pointer"
+              >
+                Save
+              </div>
+            </motion.div>
           </div>
         </motion.div>
       )}
