@@ -1,4 +1,14 @@
-import ToDoListSort from "./listSort";
+import dynamic from "next/dynamic";
+
+const ToDoListSort = dynamic(() => import("./listSort"), {
+  ssr: false,
+});
+const AddTask = dynamic(() => import("./addTask"), {
+  ssr: false,
+});
+
+
+
 
 const TodoListMain = () => {
   return (
@@ -15,7 +25,8 @@ const TodoListMain = () => {
       </div>
       <div id="detail" className="px-5 py-2">
         <p className="mb-2">To-Do List</p>
-        <ToDoListSort/>
+        <ToDoListSort />
+        <AddTask />
       </div>
     </div>
   );

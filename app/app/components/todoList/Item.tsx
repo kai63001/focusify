@@ -6,7 +6,7 @@ import ToDoCheckBox from "./checkbox";
 
 export function ToDoSortableItem(props: any) {
   const { attributes, listeners, setNodeRef, transform, transition } =
-    useSortable({ id: props.id });
+    useSortable({ id: ~~props.id });
 
   const style = {
     transform: CSS.Transform.toString(transform),
@@ -19,7 +19,7 @@ export function ToDoSortableItem(props: any) {
         <ToDoCheckBox />
         <div className="flex-1">
           <p className="text-[#eaeaea] font-bold text-md cursor-pointer">
-            Buy the holiday trip to night
+            {props.data.content}
           </p>
           <p className="text-[#eaeaea] text-xs">To-Do List</p>
         </div>
