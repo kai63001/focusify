@@ -31,3 +31,29 @@ body {
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
 }
+
+.custom-datetime-picker {
+  color: white !important;
+  background-color: transparent !important;
+  border-radius: 8px !important;
+  
+}
+.react-datetime-picker__button__icon {
+  //filter white
+  filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);
+}
+.react-datetime-picker__wrapper{
+  border: none !important;
+}
+
+.react-calendar {
+  color: black !important;
+  background-color: white !important;
+  z-index: 10000 !important;
+  position: fixed !important;
+}
+
+.react-datetime-picker__clock{
+  color: black !important;
+  display: none;
+}

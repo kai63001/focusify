@@ -4,7 +4,7 @@ import { Client, Account, Databases } from "appwrite";
 const useAppwrite = () => {
   const [client, setClient] = useState<Client | null>(null);
   const [account, setAccount] = useState<Account | null>(null);
-  const [databases, setDatabases] = useState<any | null>(null);
+  const [databases, setDatabases] = useState<Databases | null>(null);
 
   useEffect(() => {
     const client = new Client()

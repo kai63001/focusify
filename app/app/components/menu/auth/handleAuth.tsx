@@ -23,7 +23,7 @@ const HandleAuth = () => {
 
   useEffect(() => {
     const switchCaseAuth = async () => {
-      if (!await account) return;  
+      if (!await account) return;
       //check local storage  accountData
       const accountData = localStorage.getItem("accountData");
       if(accountData){

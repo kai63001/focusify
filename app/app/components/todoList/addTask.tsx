@@ -6,6 +6,10 @@ import { ID, Permission } from "appwrite";
 import { DatabaseId, CollectionId } from "@/libs/database";
 import { useAppDispatch, useAppSelector } from "@/app/redux/hook";
 import { addTask } from "@/app/redux/slice/task.slice";
+import DateTimePicker from "react-datetime-picker";
+import "react-datetime-picker/dist/DateTimePicker.css";
+import "react-calendar/dist/Calendar.css";
+import "react-clock/dist/Clock.css";
 
 const AddTask = () => {
   const { databases } = useAppwrite();
@@ -13,19 +17,20 @@ const AddTask = () => {
   const tasks = useAppSelector((state) => state.task);
 
   const [showAddTask, setShowAddTask] = useState(false);
+  const [showAddTaskDate, setShowAddTaskDate] = useState(false);
 
   const [inputTask, setInputTask] = useState("");
+  const [inputDate, setInputDate] = useState(new Date());
 
   const handleCancel = () => {
     //check if input is not empty alert
     if (inputTask.length > 0) {
       if (confirm("Are you sure you want to cancel?")) {
         // Handle cancel logic here
-        setInputTask("");
-        setShowAddTask(false);
+        clearAddTask();
       }
     } else {
-      setShowAddTask(false);
+      clearAddTask();
     }
   };
 
@@ -38,23 +43,32 @@ const AddTask = () => {
       ID.unique(),
       {
         content: inputTask,
+        //check if date is not empty
+        endDate: showAddTaskDate ? inputDate : null,
       }
     );
+    if (result) {
+      result.then(
+        function (response: any) {
+          //add id to response runing number from tasks.length
+          response.id = tasks.tasks.length + 1;
+          dispatch(addTask(response));
+          console.log(response);
+          //clear
+          clearAddTask();
+        },
+        function (error: any) {
+          console.log(error);
+        }
+      );
+    }
+  };
 
-    result.then(
-      function (response: any) {
-        //add id to response runing number from tasks.length
-        response.id = tasks.tasks.length + 1;
-        dispatch(addTask(response));
-        console.log(response);
-        //clear
-        setInputTask("");
-        setShowAddTask(false);
-      },
-      function (error: any) {
-        console.log(error);
-      }
-    );
+  const clearAddTask = () => {
+    setInputTask("");
+    setShowAddTask(false);
+    setShowAddTaskDate(false);
+    setInputDate(new Date());
   };
 
   return (
@@ -73,7 +87,7 @@ const AddTask = () => {
           initial={{ opacity: 0, scale: 1 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{
-            duration: 5,
+            duration: 2,
             delay: 0,
             ease: [0, 0.71, 0.2, 1.01],
           }}
@@ -85,23 +99,47 @@ const AddTask = () => {
             autoFocus={true}
             onChange={(e) => setInputTask(e.target.value)}
           />
-          <div className="flex justify-end space-x-1 mt-2 select-none">
-            <div onClick={handleCancel} className="px-5 py-2 cursor-pointer">
-              Cancel
+          {showAddTaskDate && (
+            <DateTimePicker
+              className="custom-datetime-picker"
+              onChange={(e: any) => setInputDate(e)}
+              value={inputDate}
+            />
+          )}
+          <div className="flex justify-between space-x-1 mt-2 select-none">
+            <div className="flex items-center sapce-x-3">
+              {!showAddTaskDate && (
+                <motion.div
+                  className="box"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                >
+                  <i
+                    className="fi fi-sr-calendar cursor-pointer"
+                    onClick={() => setShowAddTaskDate(true)}
+                  ></i>
+                </motion.div>
+              )}
             </div>
-            <motion.div
-              className="box"
-              whileHover={{ scale: 1.2 }}
-              whileTap={{ scale: 0.9 }}
-              transition={{ type: "spring", stiffness: 400, damping: 17 }}
-            >
-              <div
-                onClick={handleSave}
-                className="bg-primary px-5 py-2 rounded-md cursor-pointer"
-              >
-                Save
+            <div className="flex space-x-1">
+              <div onClick={handleCancel} className="px-5 py-2 cursor-pointer">
+                Cancel
               </div>
-            </motion.div>
+              <motion.div
+                className="box"
+                whileHover={{ scale: 1.2 }}
+                whileTap={{ scale: 0.9 }}
+                transition={{ type: "spring", stiffness: 400, damping: 17 }}
+              >
+                <button
+                  onClick={handleSave}
+                  className="bg-primary px-5 py-2 rounded-md cursor-pointer"
+                >
+                  Save
+                </button>
+              </motion.div>
+            </div>
           </div>
         </motion.div>
       )}

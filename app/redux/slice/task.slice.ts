@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface TaskState {
   tasks: any[];
+  selectedTask: any;
 }
 
 interface Task {
@@ -10,6 +11,7 @@ interface Task {
 
 const initialState: TaskState = {
   tasks: [],
+  selectedTask: "",
 };
 
 export const taskSlice = createSlice({
@@ -25,9 +27,12 @@ export const taskSlice = createSlice({
     setTasks: (state, action: PayloadAction<any>) => {
       state.tasks = action.payload;
     },
+    selectTaskList: (state, action: PayloadAction<any>) => {
+      state.selectedTask = action.payload;
+    },
   },
 });
 
-export const { addTask, removeTask, setTasks } = taskSlice.actions;
+export const { addTask, removeTask, setTasks, selectTaskList } = taskSlice.actions;
 
 export default taskSlice.reducer;
