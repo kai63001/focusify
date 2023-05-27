@@ -19,6 +19,8 @@ import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import useAppwrite from "@/app/hook/appwrite";
 import { DatabaseId, CollectionId } from "@/libs/database";
+import { useAppDispatch, useAppSelector } from "@/app/redux/hook";
+import { setTasks } from "@/app/redux/slice/task.slice";
 
 const ToDoSortableItem = dynamic(() => import("./Item"), {
   ssr: false,
@@ -26,6 +28,8 @@ const ToDoSortableItem = dynamic(() => import("./Item"), {
 
 const ToDoListSort = () => {
   const { databases } = useAppwrite();
+  const dispatch = useAppDispatch();
+  const allTask:any = useAppSelector((state) => state.task);
   const [items, setItems]: any = useState([]);
   const sensors = useSensors(
     useSensor(PointerSensor),
@@ -33,6 +37,16 @@ const ToDoListSort = () => {
       coordinateGetter: sortableKeyboardCoordinates,
     })
   );
+
+  //useEffect check allTask if change then update items
+  useEffect(() => {
+    if (allTask.tasks.length === 0) return;
+    console.log("allTask", allTask)
+    setItems(allTask.tasks)
+    
+  }
+  , [allTask]);
+
 
   useEffect(() => {
     if (!databases) return;
@@ -43,17 +57,18 @@ const ToDoListSort = () => {
     );
     result.then(
       function (response: any) {
-        console.log(response);
         //add id to items runing number from 0
         response.documents.forEach((item: any, index: number) => {
-          item.id = index + 1;
+          item.id = index + 1;  
         });
         setItems(response.documents);
+        dispatch(setTasks(response.documents))
       },
       function (error: any) {
         console.log(error);
       }
     );
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [databases]);
 
   function handleDragEnd(event: any) {

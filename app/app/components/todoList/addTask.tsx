@@ -4,9 +4,14 @@ import { motion } from "framer-motion";
 import useAppwrite from "@/app/hook/appwrite";
 import { ID, Permission } from "appwrite";
 import { DatabaseId, CollectionId } from "@/libs/database";
+import { useAppDispatch, useAppSelector } from "@/app/redux/hook";
+import { addTask } from "@/app/redux/slice/task.slice";
 
 const AddTask = () => {
   const { databases } = useAppwrite();
+  const dispatch = useAppDispatch();
+  const tasks = useAppSelector((state) => state.task);
+
   const [showAddTask, setShowAddTask] = useState(false);
 
   const [inputTask, setInputTask] = useState("");
@@ -38,7 +43,13 @@ const AddTask = () => {
 
     result.then(
       function (response: any) {
+        //add id to response runing number from tasks.length
+        response.id = tasks.tasks.length + 1;
+        dispatch(addTask(response));
         console.log(response);
+        //clear
+        setInputTask("");
+        setShowAddTask(false);
       },
       function (error: any) {
         console.log(error);
