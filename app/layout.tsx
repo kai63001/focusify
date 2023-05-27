@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import { Providers } from "./redux/provider";
 import { AlertProvider } from "./hook/AlertContext";
 import MotionAlert from "./hook/MotionAlert";
+import ToastAlert from "./hook/ToastAlert";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -21,6 +22,7 @@ export default function RootLayout({
         <AlertProvider>
           <Providers>{children}</Providers>
           <MotionAlert />
+          <ToastAlert />
         </AlertProvider>
       </body>
     </html>

@@ -1,3 +1,4 @@
+import { useAlert } from "@/app/hook/AlertContext";
 import useAppwrite from "@/app/hook/appwrite";
 import { useAppSelector } from "@/app/redux/hook";
 import { DatabaseId, CollectionId } from "@/libs/database";
@@ -5,6 +6,7 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 
 const ToDoDetailDescription = () => {
+  const { toastAlert, closeAlert }: any = useAlert();
   const selectedTask = useAppSelector((state) => state.task.selectedTask);
   const selectedTaskData = useAppSelector(
     (state) => state.task.selectedTaskData
@@ -30,6 +32,10 @@ const ToDoDetailDescription = () => {
     result
       .then(function (response: any) {
         console.log(response);
+        toastAlert("Description updated");
+        setTimeout(() => {
+          closeAlert();
+        }, 1000);
       })
       .catch(function (error: any) {
         console.log(error);

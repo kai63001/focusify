@@ -15,7 +15,7 @@ const MotionAlert = () => {
     alert.onConfirm && alert.onConfirm();
   };
 
-  return alert ? (
+  return alert && alert.type == "alert" ? (
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
