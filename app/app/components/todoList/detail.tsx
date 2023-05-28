@@ -11,6 +11,7 @@ import { useEffect, useState } from "react";
 import DatePreview from "./lib/datePreview";
 import TabBar from "./lib/tabBar";
 import { useAlert } from "@/app/hook/AlertContext";
+import DateTimePicker from "react-datetime-picker";
 
 const ToDoDetail = () => {
   const { openAlert }: any = useAlert();
@@ -20,6 +21,14 @@ const ToDoDetail = () => {
   const allTask = useAppSelector((state) => state.task);
   const dispatch = useAppDispatch();
   const [detail, setDetail] = useState<any>({});
+
+  // ! edit zone
+  const [edit, setEdit] = useState({
+    title: false,
+    endDate: false,
+  });
+  const [editTitle, setEditTitle] = useState("");
+  const [editEndDate, setEditEndDate] = useState();
 
   const backToMain = () => {
     dispatch(selectTaskList(""));
@@ -39,6 +48,10 @@ const ToDoDetail = () => {
         console.log("response", response);
         setDetail(response);
         dispatch(setSelectedTaskData(response));
+
+        //set editTitle
+        setEditTitle(response.title);
+        setEditEndDate(response.endDate);
       },
       function (error: any) {
         console.log(error);
@@ -75,6 +88,84 @@ const ToDoDetail = () => {
     );
   };
 
+  const updateEndDate = () => {
+    if (!databases) return;
+    const result = databases?.updateDocument(
+      DatabaseId.focusifyApp,
+      CollectionId.task,
+      selectedTask,
+      {
+        endDate: editEndDate,
+      }
+    );
+    result
+      .then(function (response: any) {
+        console.log("response", response);
+        // update allTask by id
+        const newTask = allTask.tasks.map((item: any) => {
+          if (item.$id === selectedTask) {
+            return {
+              ...item,
+              endDate: editEndDate,
+            };
+          }
+          return item;
+        });
+        dispatch(setTasks(newTask));
+        setEdit({
+          ...edit,
+          endDate: false,
+        });
+        //set detail
+        setDetail({
+          ...detail,
+          endDate: editEndDate,
+        });
+      })
+      .catch((error: any) => {
+        console.log(error);
+      });
+  };
+
+  const updateTitle = () => {
+    if (!databases) return;
+    const result = databases?.updateDocument(
+      DatabaseId.focusifyApp,
+      CollectionId.task,
+      selectedTask,
+      {
+        content: editTitle,
+      }
+    );
+    result
+      .then(function (response: any) {
+        console.log("response", response);
+        // update allTask by id
+        const newTask = allTask.tasks.map((item: any) => {
+          if (item.$id === selectedTask) {
+            return {
+              ...item,
+              content: editTitle,
+            };
+          }
+          return item;
+        });
+        dispatch(setTasks(newTask));
+        setEdit({
+          ...edit,
+          title: false,
+        });
+        //set detail
+        setDetail({
+          ...detail,
+          content: editTitle,
+        });
+      })
+      .catch((error: any) => {
+        console.log(error);
+      });
+  };
+
   return (
     <motion.div
       initial={{ scale: 0.7 }}
@@ -106,7 +197,44 @@ const ToDoDetail = () => {
           id="detail"
           className="px-5 py-2 overflow-scroll max-h-96 overflow-x-hidden no-scrollbar"
         >
-          <h2 className="text-2xl mb-5">{detail.content}</h2>
+          <div className="group flex space-x-3 items-center mb-5">
+            {edit.title ? (
+              <>
+                <input
+                  className="w-full bg-transparent border-b border-gray-300 focus:outline-none text-xl"
+                  type="text"
+                  value={editTitle ?? detail.content}
+                  onChange={(e) => setEditTitle(e.target.value)}
+                />
+                <i
+                  onClick={updateTitle}
+                  className="fi fi-sr-check cursor-pointer"
+                ></i>
+                <i
+                  onClick={() =>
+                    setEdit({
+                      ...edit,
+                      title: false,
+                    })
+                  }
+                  className="fi fi-sr-x cursor-pointer"
+                ></i>
+              </>
+            ) : (
+              <>
+                <h2 className="text-2xl">{detail.content}</h2>
+                <i
+                  onClick={() =>
+                    setEdit({
+                      ...edit,
+                      title: true,
+                    })
+                  }
+                  className="fi fi-sr-pencil hidden group-hover:inline-flex cursor-pointer"
+                ></i>
+              </>
+            )}
+          </div>
           <div>
             {/* table no border */}
             <table className="table-row w-full select-none">
@@ -114,12 +242,48 @@ const ToDoDetail = () => {
                 {detail.endDate && (
                   <tr>
                     <td className="py-1 text-gray-300">Date</td>
-                    <td className="px-2 py-1">
-                      <DatePreview
-                        className="cursor-pointer"
-                        defaultMode={true}
-                        date={detail.endDate}
-                      />
+                    <td className="px-2 py-1 group flex space-x-3 items-center">
+                      {edit.endDate ? (
+                        <>
+                          <DateTimePicker
+                            className="custom-datetime-picker"
+                            onChange={(e: any) => setEditEndDate(e)}
+                            clearIcon={null}
+                            calendarIcon={null}
+                            value={editEndDate}
+                          />
+                          <i
+                            onClick={updateEndDate}
+                            className="fi fi-sr-check cursor-pointer mt-1"
+                          ></i>
+                          <i
+                            onClick={() => {
+                              setEdit({
+                                ...edit,
+                                endDate: false,
+                              });
+                            }}
+                            className="fi fi-br-cross cursor-pointer mt-1"
+                          ></i>
+                        </>
+                      ) : (
+                        <>
+                          <DatePreview
+                            className="cursor-pointer"
+                            defaultMode={true}
+                            date={detail.endDate}
+                          />
+                          <i
+                            onClick={() =>
+                              setEdit({
+                                ...edit,
+                                endDate: true,
+                              })
+                            }
+                            className="fi fi-sr-pencil hidden group-hover:inline-flex cursor-pointer"
+                          ></i>
+                        </>
+                      )}
                     </td>
                   </tr>
                 )}
