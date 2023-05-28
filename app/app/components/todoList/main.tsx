@@ -35,7 +35,7 @@ const TodoListMain = () => {
       }}
     >
       {checkLogin() && (
-        <div className="absolute w-full h-full bg-black bg-opacity-25 backdrop-blur-lg rounded-md handle flex">
+        <div className="opacity-0 hover:opacity-100 duration-300 absolute w-full h-full bg-black bg-opacity-25 backdrop-blur-lg rounded-md handle flex">
           <div className="m-auto">
             {/* need login first */}
             <p className="text-white text-center">
@@ -48,7 +48,7 @@ const TodoListMain = () => {
         <div className="flex justify-between">
           <div className="px-5 pt-4 pb-2 items-center flex space-x-2">
             <i className="fi fi-rr-horizontal-rule cursor-pointer"></i>
-            <i className="fi fi-bs-arrow-up-right-and-arrow-down-left-from-center cursor-pointer"></i>
+            {/* <i className="fi fi-bs-arrow-up-right-and-arrow-down-left-from-center cursor-pointer"></i> */}
           </div>
           <div className="w-full cursor-grab handle"></div>
           <div className="px-5 pt-4 pb-2 flex items-center space-x-2">

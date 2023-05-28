@@ -120,32 +120,28 @@ const AddTask = () => {
 
           <div className="flex justify-between space-x-1 mt-2 select-none">
             <div className="flex items-center space-x-3">
-              {!showAddTaskDate && (
-                <motion.div
-                  className="box"
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
-                  transition={{ type: "spring", stiffness: 400, damping: 17 }}
-                >
-                  <i
-                    className="fi fi-sr-calendar cursor-pointer"
-                    onClick={() => setShowAddTaskDate(true)}
-                  ></i>
-                </motion.div>
-              )}
-              {!showAddDescription && (
-                <motion.div
-                  className="box"
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
-                  transition={{ type: "spring", stiffness: 400, damping: 17 }}
-                >
-                  <i
-                    className="fi fi-sr-notebook cursor-pointer"
-                    onClick={() => setShowAddDescription(true)}
-                  ></i>
-                </motion.div>
-              )}
+              <motion.div
+                className="box"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                transition={{ type: "spring", stiffness: 400, damping: 17 }}
+              >
+                <i
+                  className={`fi fi-sr-calendar cursor-pointer ${showAddTaskDate && 'text-gray-500'}`}
+                  onClick={() => setShowAddTaskDate(!showAddTaskDate)}
+                ></i>
+              </motion.div>
+              <motion.div
+                className="box"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                transition={{ type: "spring", stiffness: 400, damping: 17 }}
+              >
+                <i
+                  className={`fi fi-sr-notebook cursor-pointer ${showAddDescription && 'text-gray-500'}`}
+                  onClick={() => setShowAddDescription(!showAddDescription)}
+                ></i>
+              </motion.div>
             </div>
             <div className="flex space-x-1">
               <div onClick={handleCancel} className="px-5 py-2 cursor-pointer">

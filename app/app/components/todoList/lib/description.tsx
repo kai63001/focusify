@@ -1,11 +1,13 @@
 import { useAlert } from "@/app/hook/AlertContext";
 import useAppwrite from "@/app/hook/appwrite";
-import { useAppSelector } from "@/app/redux/hook";
+import { useAppDispatch, useAppSelector } from "@/app/redux/hook";
+import { setSelectedTaskData } from "@/app/redux/slice/task.slice";
 import { DatabaseId, CollectionId } from "@/libs/database";
 import { motion } from "framer-motion";
 import { useState } from "react";
 
 const ToDoDetailDescription = () => {
+  const dispatch = useAppDispatch();
   const { toastAlert, closeAlert }: any = useAlert();
   const selectedTask = useAppSelector((state) => state.task.selectedTask);
   const selectedTaskData = useAppSelector(
@@ -36,6 +38,13 @@ const ToDoDetailDescription = () => {
         setTimeout(() => {
           closeAlert();
         }, 1000);
+        //dispath setSelectedTaskData
+        dispatch(
+          setSelectedTaskData({
+            ...selectedTaskData,
+            description: newDescription,
+          })
+        );
       })
       .catch(function (error: any) {
         console.log(error);
@@ -45,7 +54,7 @@ const ToDoDetailDescription = () => {
   return (
     <>
       <div className="bg-primaryLight rounded-md p-3 text-md">
-        {/* textare a*/}
+        {/* textarea */}
         <textarea
           className="w-full h-full bg-transparent resize-none outline-none"
           placeholder="Add a more detailed description..."

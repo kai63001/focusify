@@ -92,7 +92,7 @@ const ToDoDetail = () => {
               onClick={backToMain}
               className="fi fi-sr-arrow-left cursor-pointer"
             ></i>
-            <i className="fi fi-bs-arrow-up-right-and-arrow-down-left-from-center cursor-pointer"></i>
+            {/* <i className="fi fi-bs-arrow-up-right-and-arrow-down-left-from-center cursor-pointer"></i> */}
           </div>
           <div className="w-full cursor-grab handle"></div>
           <div className="px-5 pt-4 pb-2 flex items-center space-x-2">
@@ -100,7 +100,6 @@ const ToDoDetail = () => {
               onClick={deleteTask}
               className="fi fi-sr-trash cursor-pointer"
             ></i>
-            <i className="fi fi-br-menu-dots-vertical cursor-pointer"></i>
           </div>
         </div>
         <div
@@ -128,9 +127,15 @@ const ToDoDetail = () => {
                 <tr>
                   <td className="py-1 text-gray-300">Status</td>
                   <td className="px-2 py-1">
-                    <span className="text-xs text-white bg-primaryLight rounded-md px-2 py-1">
-                      PENDDING
-                    </span>
+                    {detail.onTask == 0 ? (
+                      <span className="text-xs text-white bg-primaryLight rounded-md px-2 py-1">
+                        PENDDING
+                      </span>
+                    ) : (
+                      <span className="text-xs text-white bg-green-700 rounded-md px-2 py-1">
+                        COMPLEATE
+                      </span>
+                    )}
                   </td>
                 </tr>
               </tbody>
