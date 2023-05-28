@@ -4,4 +4,5 @@ export enum DatabaseId {
 
 export enum CollectionId {
   task = "6471a6c388eba85f3359",
+  note = "6473411a51c918853ddb",
 }

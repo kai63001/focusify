@@ -11,9 +11,12 @@ const MainList = dynamic(() => import("./components/menu/mainList"), {
 const TodoListMain = dynamic(() => import("./components/todoList/main"), {
   ssr: false,
 });
+const NoteMain = dynamic(() => import("./components/note/main"), {
+  ssr: false,
+});
 
 const AppFocusPage = () => {
-  const { appTodoList } = useAppSelector((state) => state.appControl);
+  const { appTodoList, appNote } = useAppSelector((state) => state.appControl);
   return (
     <div className="w-screen h-screen relative overflow-hidden">
       {/* right */}
@@ -23,6 +26,11 @@ const AppFocusPage = () => {
         {appTodoList && (
           <Dragable>
             <TodoListMain />
+          </Dragable>
+        )}
+        {appNote && (
+          <Dragable>
+            <NoteMain />
           </Dragable>
         )}
       </div>
