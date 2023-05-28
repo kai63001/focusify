@@ -3,12 +3,14 @@ import { configureStore } from '@reduxjs/toolkit'
 import counterReducer from './slice/counter.slice'
 import loginReducer from './slice/login.slice'
 import taskReducer from './slice/task.slice'
+import appControlReducer from './slice/appControl.slice'
 
 export const store = configureStore({
   reducer: {
     counter: counterReducer,
     login: loginReducer,
-    task: taskReducer
+    task: taskReducer,
+    appControl: appControlReducer
   },
 })
 

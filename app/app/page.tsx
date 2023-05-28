@@ -1,4 +1,6 @@
+"use client";
 import dynamic from "next/dynamic";
+import { useAppSelector } from "../redux/hook";
 
 const Dragable = dynamic(() => import("./components/dragable"), {
   ssr: false,
@@ -10,17 +12,19 @@ const TodoListMain = dynamic(() => import("./components/todoList/main"), {
   ssr: false,
 });
 
-
 const AppFocusPage = () => {
+  const { appTodoList } = useAppSelector((state) => state.appControl);
   return (
     <div className="w-screen h-screen relative">
       {/* right */}
       <MainList />
       {/* dragable */}
       <div className="w-screen h-screen">
-        <Dragable>
-          <TodoListMain />
-        </Dragable>
+        {appTodoList && (
+          <Dragable>
+            <TodoListMain />
+          </Dragable>
+        )}
       </div>
 
       <div>
