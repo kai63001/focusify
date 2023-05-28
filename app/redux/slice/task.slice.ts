@@ -5,6 +5,11 @@ interface TaskState {
   selectedTask: any;
   selectedTaskData: any;
   checkedId: any[];
+  showOnTask: {
+    showTodoList: boolean;
+    showDoneList: boolean;
+  };
+  openDropdown: boolean;
 }
 
 interface Task {
@@ -16,6 +21,11 @@ const initialState: TaskState = {
   selectedTask: "",
   selectedTaskData: {},
   checkedId: [],
+  showOnTask: {
+    showTodoList: true,
+    showDoneList: false,
+  },
+  openDropdown: false,
 };
 
 export const taskSlice = createSlice({
@@ -49,7 +59,16 @@ export const taskSlice = createSlice({
       if (index > -1) {
         state.checkedId.splice(index, 1);
       }
-    }
+    },
+    setShowTodoList: (state, action: PayloadAction<any>) => {
+      state.showOnTask.showTodoList = action.payload;
+    },
+    setShowDoneList: (state, action: PayloadAction<any>) => {
+      state.showOnTask.showDoneList = action.payload;
+    },
+    setOpenDropdown: (state, action: PayloadAction<any>) => {
+      state.openDropdown = action.payload;
+    },
   },
 });
 
@@ -61,7 +80,10 @@ export const {
   setSelectedTaskData,
   setCheckedId,
   removeCheckedId,
-  removeTaskById
+  removeTaskById,
+  setShowTodoList,
+  setShowDoneList,
+  setOpenDropdown,
 } = taskSlice.actions;
 
 export default taskSlice.reducer;

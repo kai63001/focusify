@@ -9,10 +9,10 @@ import {
 import { CollectionId, DatabaseId } from "@/libs/database";
 import { useState } from "react";
 
-const ToDoCheckBox = ({ id }: any) => {
+const ToDoCheckBox = ({ id, onTask = 0 }: any) => {
   const { databases } = useAppwrite();
   const dispatch = useAppDispatch();
-  const [checked, setChecked] = useState(false);
+  const [checked, setChecked] = useState(onTask === 1 ? true : false);
   const [isLoaded, setIsLoaded] = useState(false);
   const handleChecked = (check: boolean) => {
     if (isLoaded) return;
@@ -26,7 +26,7 @@ const ToDoCheckBox = ({ id }: any) => {
       // onTask = 1 mean this task is on completed list
       // onTask = 0 mean this task is on todo list
       // onTask feature is not implement yet
-      const result:any = databases?.updateDocument(
+      const result: any = databases?.updateDocument(
         DatabaseId.focusifyApp,
         CollectionId.task,
         id,
@@ -51,8 +51,8 @@ const ToDoCheckBox = ({ id }: any) => {
   if (checked) {
     return (
       <div
-        className="bg-blueBg w-4 h-4 rounded-sm mr-2 mt-1 flex justify-center items-center cursor-pointer"
-        onClick={() => handleChecked(false)}
+        className="bg-blue-800 w-4 h-4 rounded-sm mr-2 mt-1 flex justify-center items-center cursor-pointer"
+        // onClick={() => handleChecked(false)}
       >
         <i className="fi fi-br-check text-[#eaeaea] text-xs pt-1"></i>
       </div>

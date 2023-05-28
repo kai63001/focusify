@@ -33,14 +33,15 @@ export function ToDoSortableItem(props: any) {
   return (
     <div style={style}>
       <div className="bg-primary rounded-md px-3 py-2 flex items-start mb-2 select-none">
-        <ToDoCheckBox id={props.data.$id} />
+        <ToDoCheckBox id={props.data.$id} onTask={props.onTask} />
         <div className={`flex-1 `}>
           <p
             onClick={selectTask}
             className={`${
               timeWasPassed() ? "text-red-500" : "text-[#eaeaea]"
             } font-bold text-md cursor-pointer ${
-              checkedId.indexOf(props.data.$id) >= 0 && "line-through"
+              checkedId.indexOf(props.data.$id) >= 0 ||
+              (props.onTask == 1 && "line-through")
             }`}
           >
             {props.data.content}

@@ -15,7 +15,7 @@ const TodoListMain = dynamic(() => import("./components/todoList/main"), {
 const AppFocusPage = () => {
   const { appTodoList } = useAppSelector((state) => state.appControl);
   return (
-    <div className="w-screen h-screen relative">
+    <div className="w-screen h-screen relative overflow-hidden">
       {/* right */}
       <MainList />
       {/* dragable */}

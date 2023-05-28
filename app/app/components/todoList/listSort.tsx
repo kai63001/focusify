@@ -28,7 +28,7 @@ const ToDoSortableItem = dynamic(() => import("./Item"), {
   ssr: false,
 });
 
-const ToDoListSort = () => {
+const ToDoListSort = ({ onTask = 0 }: { onTask?: number }) => {
   const { databases } = useAppwrite();
   const dispatch = useAppDispatch();
   const allTask: any = useAppSelector((state) => state.task);
@@ -54,7 +54,7 @@ const ToDoListSort = () => {
       CollectionId.task,
       [
         // query onTask == 0 only
-        Query.equal("onTask", 0),
+        Query.equal("onTask", onTask),
       ]
     );
     result.then(
@@ -64,6 +64,7 @@ const ToDoListSort = () => {
           item.id = index + 1;
         });
         setItems(response.documents);
+        if (onTask === 1) return; //if task is done then return
         dispatch(setTasks(response.documents));
       },
       function (error: any) {
@@ -121,7 +122,12 @@ const ToDoListSort = () => {
             transition={{ type: "spring", stiffness: 400, damping: 17 }}
             key={index}
           >
-            <ToDoSortableItem data={data} key={data.id} id={data.id} />
+            <ToDoSortableItem
+              data={data}
+              key={data.id}
+              id={data.id}
+              onTask={onTask}
+            />
           </motion.div>
         ))}
       </SortableContext>
