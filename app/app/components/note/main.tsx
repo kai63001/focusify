@@ -1,13 +1,25 @@
-import { useAppDispatch } from "@/app/redux/hook";
+import { useAppDispatch, useAppSelector } from "@/app/redux/hook";
 import { setAppNote } from "@/app/redux/slice/appControl.slice";
 import { motion } from "framer-motion";
+import NoteDetail from "./detail";
+import { setSelectNote } from "@/app/redux/slice/note.slice";
 
 const NoteMain = () => {
   const dispath = useAppDispatch();
+  const selectedNote = useAppSelector((state) => state.note.selectedNote);
 
   const closeNoteApp = () => {
     dispath(setAppNote(false));
   };
+
+  if (selectedNote !== "") {
+    return <NoteDetail />;
+  }
+
+  const handleSelectNote = () => {
+    dispath(setSelectNote("test"));
+  };
+
   return (
     <motion.div
       initial={{ scale: 0.7 }}
@@ -33,7 +45,12 @@ const NoteMain = () => {
           <h2 className="text-2xl">Notes</h2>
           {/* list my note */}
           <div className="mt-5 flex flex-col space-y-3">
-            <div className="bg-primaryLight w-full px-5 py-3 rounded-md cursor-pointer">
+            <div
+              onClick={() => {
+                handleSelectNote();
+              }}
+              className="bg-primaryLight w-full px-5 py-3 rounded-md cursor-pointer"
+            >
               <p className="text-lg">Do Homework</p>
               <p className="text-sm text-gray-400">2021-10-10</p>
             </div>

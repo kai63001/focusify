@@ -11,7 +11,7 @@ const OpenNote = () => {
 
   return (
     <div onClick={openNote} className="mt-1 cursor-pointer">
-      <i className="fi fi-ss-notes mt-1"></i>
+      <i className={`fi fi-ss-notes mt-1 ${appNote && 'text-gray-500'}`}></i>
     </div>
   );
 };

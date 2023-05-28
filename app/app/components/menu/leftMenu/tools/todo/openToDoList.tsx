@@ -11,7 +11,7 @@ const OpenToDoList = () => {
 
   return (
     <div onClick={openToDoList} className="mt-1 cursor-pointer">
-      <i className="fi fi-sr-note mt-1"></i>
+      <i className={`fi fi-sr-note mt-1 ${appToDoList && "text-gray-500"}`}></i>
     </div>
   );
 };
