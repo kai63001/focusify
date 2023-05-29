@@ -87,7 +87,7 @@ const NoteMain = () => {
                   handleSelectNote(item.$id);
                 }}
                 key={index}
-                className="bg-primaryLight w-full px-5 py-3 rounded-md cursor-pointer"
+                className="bg-primaryDark2 w-full px-5 py-3 rounded-md cursor-pointer"
               >
                 <p className="text-lg">{item.title}</p>
                 <p className="text-sm text-gray-400">2021-10-10</p>
