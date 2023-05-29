@@ -17,8 +17,8 @@ const Dragable = (props: any) => {
         }
       }}
       defaultPosition={{
-        x: props.x ?? Math.random() * (window.innerWidth - 500),
-        y: props.y ?? Math.random() * (window.innerHeight - 500),
+        x: props.x == 0 ? Math.random() * (window.innerWidth - 500) : props.x,
+        y: props.y == 0 ? Math.random() * (window.innerHeight - 500) : props.y,
       }}
     >
       <div
