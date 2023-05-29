@@ -176,7 +176,7 @@ const ToDoDetail = () => {
         damping: 20,
       }}
     >
-      <div className="bg-primary border border-primaryLight rounded-md text-sm w-[450px]">
+      <div className="bg-primary bg-opacity-95 backdrop-blur-lg border border-primaryLight rounded-md text-sm w-[450px]">
         <div className="flex justify-between">
           <div className="px-5 pt-4 pb-2 items-center flex space-x-2">
             <i
