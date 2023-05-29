@@ -60,6 +60,10 @@ export const appControlSlice = createSlice({
       const maxZIndex = Math.max(
         ...Object.values(state).map((app: any) => app.index)
       );
+      if (maxZIndex === -Infinity) {
+        state[action.payload.app].index = 20;
+        return;
+      }
       state[action.payload.app].index = maxZIndex + 1;
     },
   },

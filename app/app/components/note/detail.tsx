@@ -37,7 +37,7 @@ const NoteDetail = () => {
       });
   }, [databases, selectedNote]);
 
-  const handleAddNote = () => {
+  const handleSaveNote = () => {
     if (selectedNote == "add") {
       createNote();
       return;
@@ -105,8 +105,11 @@ const NoteDetail = () => {
             ></i>
           </div>
           <div className="w-full cursor-grab handle"></div>
+          <div className="px-5 pt-4 pb-2 items-center flex space-x-2">
+            <i onClick={handleSaveNote} className="fi fi-sr-disk text-lg cursor-pointer"></i>
+          </div>
         </div>
-        <div className="px-5 py-2">
+        <div className="px-5 pt-2 pb-5">
           <input
             onChange={(e) => setTitleInput(e.target.value)}
             value={titleInput}
@@ -129,14 +132,14 @@ const NoteDetail = () => {
                 "removeformat | help",
             }}
           />
-          <div className="flex justify-end mt-2 mb-2">
+          {/* <div className="flex justify-end mt-2 mb-2">
             <button
               onClick={handleAddNote}
               className="bg-primaryLight px-4 py-2 rounded-md"
             >
               Save
             </button>
-          </div>
+          </div> */}
         </div>
       </div>
     </motion.div>

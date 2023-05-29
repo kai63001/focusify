@@ -21,7 +21,15 @@ const Dragable = (props: any) => {
         y: props.y ?? Math.random() * (window.innerHeight - 500),
       }}
     >
-      <div className="absolute" style={{ zIndex: props.index }}>
+      <div
+        onClick={(e) => {
+          if (props?.onDragStart) {
+            props?.onDragStart(e);
+          }
+        }}
+        className="absolute"
+        style={{ zIndex: props.index }}
+      >
         {props.children}
       </div>
     </Draggable>
