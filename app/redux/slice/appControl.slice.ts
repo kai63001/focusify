@@ -3,13 +3,41 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 export interface AppControlState {
-  appTodoList: boolean;
-  appNote: boolean;
+  appTodoList: {
+    isShow: boolean;
+    position: {
+      x: number;
+      y: number;
+    };
+    index: number;
+  };
+  appNote: {
+    isShow: boolean;
+    position: {
+      x: number;
+      y: number;
+    };
+    index: number;
+  };
 }
 
 const initialState: AppControlState = {
-  appTodoList: false,
-  appNote: false,
+  appTodoList: {
+    isShow: false,
+    position: {
+      x: 0,
+      y: 0,
+    },
+    index: 20,
+  },
+  appNote: {
+    isShow: false,
+    position: {
+      x: 0,
+      y: 0,
+    },
+    index: 20,
+  },
 };
 
 export const appControlSlice = createSlice({
@@ -18,14 +46,27 @@ export const appControlSlice = createSlice({
   reducers: {
     //toDolist custom
     setAppTodoList: (state, action: PayloadAction<any>) => {
-      state.appTodoList = action.payload;
+      state.appTodoList.isShow = action.payload;
     },
     setAppNote: (state, action: PayloadAction<any>) => {
-      state.appNote = action.payload;
+      state.appNote.isShow = action.payload;
+    },
+    setPosition: (state:any, action: PayloadAction<any>) => {
+
+      state[action.payload.app].position = action.payload.position;
+      console.log(action.payload)
+      //update index more than every app
+      //array to list
+      let appList = Object.values(state);
+      //sort by index
+      // appList.sort((a, b) => {
+      //   return a.index - b.index;
+      // });
+      console.log(appList);
     },
   },
 });
 
-export const { setAppTodoList, setAppNote } = appControlSlice.actions;
+export const { setAppTodoList, setAppNote,setPosition } = appControlSlice.actions;
 
 export default appControlSlice.reducer;

@@ -4,7 +4,7 @@ import { setAppTodoList } from "@/app/redux/slice/appControl.slice";
 
 const OpenToDoList = () => {
   const dispath = useAppDispatch();
-  const appToDoList = useAppSelector((state) => state.appControl.appTodoList);
+  const appToDoList = useAppSelector((state) => state.appControl.appTodoList.isShow);
   const openToDoList = () => {
     dispath(setAppTodoList(!appToDoList));
   };

@@ -6,6 +6,7 @@ import { setSelectNote } from "@/app/redux/slice/note.slice";
 import useAppwrite from "@/app/hook/appwrite";
 import { useEffect, useState } from "react";
 import { CollectionId, DatabaseId } from "@/libs/database";
+import dayjs from "@/libs/day";
 
 const NoteMain = () => {
   const { databases } = useAppwrite();
@@ -90,7 +91,11 @@ const NoteMain = () => {
                 className="bg-primaryDark2 w-full px-5 py-3 rounded-md cursor-pointer"
               >
                 <p className="text-lg">{item.title}</p>
-                <p className="text-sm text-gray-400">2021-10-10</p>
+                <p className="text-sm text-gray-400">
+                  {dayjs().diff(item.$createdAt, "day") > 1
+                    ? dayjs(item.$createdAt).format("DD/MM/YYYY")
+                    : dayjs(item.$createdAt).fromNow()}
+                </p>
               </div>
             ))}
           </div>

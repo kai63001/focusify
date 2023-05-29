@@ -4,7 +4,7 @@ import { setAppNote } from "@/app/redux/slice/appControl.slice";
 
 const OpenNote = () => {
   const dispath = useAppDispatch();
-  const appNote = useAppSelector((state) => state.appControl.appNote);
+  const appNote = useAppSelector((state) => state.appControl.appNote.isShow);
   const openNote = () => {
     dispath(setAppNote(!appNote));
   };

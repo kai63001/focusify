@@ -6,9 +6,14 @@ const Dragable = (props: any) => {
     <Draggable
       handle=".handle"
       bounds="parent"
+      onStop={(e) => {
+        if (props?.onDragEnd) {
+          props?.onDragEnd(e);
+        }
+      }}
       defaultPosition={{
-        x: Math.random() * (window.innerWidth - 500),
-        y: Math.random() * (window.innerHeight - 500),
+        x: props.x ?? Math.random() * (window.innerWidth - 500),
+        y: props.y ?? Math.random() * (window.innerHeight - 500),
       }}
     >
       <div className="absolute" style={{ zIndex: 10 }}>
