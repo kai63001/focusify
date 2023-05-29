@@ -1,12 +1,15 @@
 "use client";
 import { useAppDispatch, useAppSelector } from "@/app/redux/hook";
-import { setAppTodoList } from "@/app/redux/slice/appControl.slice";
+import { setOpenApp } from "@/app/redux/slice/appControl.slice";
 
 const OpenToDoList = () => {
   const dispath = useAppDispatch();
   const appToDoList = useAppSelector((state) => state.appControl.appTodoList.isShow);
   const openToDoList = () => {
-    dispath(setAppTodoList(!appToDoList));
+    dispath(setOpenApp({
+      isShow: !appToDoList,
+      app: "appTodoList",
+    }));
   };
 
   return (

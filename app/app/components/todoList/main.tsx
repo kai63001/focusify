@@ -3,7 +3,7 @@ import { useAppDispatch, useAppSelector } from "@/app/redux/hook";
 import dynamic from "next/dynamic";
 import ToDoDetail from "./detail";
 import { motion } from "framer-motion";
-import { setAppTodoList } from "@/app/redux/slice/appControl.slice";
+import { setOpenApp } from "@/app/redux/slice/appControl.slice";
 import DotBarDropDown from "./lib/dotBarDropdown";
 import { useState } from "react";
 
@@ -28,7 +28,7 @@ const TodoListMain = () => {
   };
 
   const closeTodoList = () => {
-    dispath(setAppTodoList(false));
+    dispath(setOpenApp({ isShow: false, app: "appTodoList" }));
   };
   // if click task then show detail
   if (selectedTask != "") {

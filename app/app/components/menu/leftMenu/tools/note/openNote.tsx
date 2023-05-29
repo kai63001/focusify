@@ -1,12 +1,15 @@
 "use client";
 import { useAppDispatch, useAppSelector } from "@/app/redux/hook";
-import { setAppNote } from "@/app/redux/slice/appControl.slice";
+import { setOpenApp } from "@/app/redux/slice/appControl.slice";
 
 const OpenNote = () => {
   const dispath = useAppDispatch();
   const appNote = useAppSelector((state) => state.appControl.appNote.isShow);
   const openNote = () => {
-    dispath(setAppNote(!appNote));
+    dispath(setOpenApp({
+      isShow: !appNote,
+      app: "appNote",
+    }));
   };
 
   return (

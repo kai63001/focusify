@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from "@/app/redux/hook";
-import { setAppNote } from "@/app/redux/slice/appControl.slice";
+import { setOpenApp } from "@/app/redux/slice/appControl.slice";
 import { motion } from "framer-motion";
 import NoteDetail from "./detail";
 import { setSelectNote } from "@/app/redux/slice/note.slice";
@@ -15,7 +15,7 @@ const NoteMain = () => {
   const [listNote, setListNote] = useState([]);
 
   const closeNoteApp = () => {
-    dispath(setAppNote(false));
+    dispath(setOpenApp({ app: "appNote", isShow: false }));
   };
 
   //getDate from database

@@ -45,11 +45,16 @@ export const appControlSlice = createSlice({
   initialState,
   reducers: {
     //toDolist custom
-    setAppTodoList: (state, action: PayloadAction<any>) => {
-      state.appTodoList.isShow = action.payload;
-    },
-    setAppNote: (state, action: PayloadAction<any>) => {
-      state.appNote.isShow = action.payload;
+    setOpenApp: (state: any, action: PayloadAction<any>) => {
+      state[action.payload.app].isShow = action.payload.isShow;
+      const maxZIndex = Math.max(
+        ...Object.values(state).map((app: any) => app.index)
+      );
+      if (maxZIndex === -Infinity) {
+        state[action.payload.app].index = 20;
+        return;
+      }
+      state[action.payload.app].index = maxZIndex + 1;
     },
     setPosition: (state: any, action: PayloadAction<any>) => {
       state[action.payload.app].position = action.payload.position;
@@ -69,7 +74,6 @@ export const appControlSlice = createSlice({
   },
 });
 
-export const { setAppTodoList, setAppNote, setPosition, setIndex } =
-  appControlSlice.actions;
+export const { setOpenApp, setPosition, setIndex } = appControlSlice.actions;
 
 export default appControlSlice.reducer;
