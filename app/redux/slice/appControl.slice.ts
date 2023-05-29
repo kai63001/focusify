@@ -51,22 +51,21 @@ export const appControlSlice = createSlice({
     setAppNote: (state, action: PayloadAction<any>) => {
       state.appNote.isShow = action.payload;
     },
-    setPosition: (state:any, action: PayloadAction<any>) => {
-
+    setPosition: (state: any, action: PayloadAction<any>) => {
       state[action.payload.app].position = action.payload.position;
-      console.log(action.payload)
-      //update index more than every app
-      //array to list
-      let appList = Object.values(state);
-      //sort by index
-      // appList.sort((a, b) => {
-      //   return a.index - b.index;
-      // });
-      console.log(appList);
+    },
+    setIndex: (state: any, action: PayloadAction<any>) => {
+      // state[action.payload.app].index = action.payload.index;
+      //caculate z-index
+      const maxZIndex = Math.max(
+        ...Object.values(state).map((app: any) => app.index)
+      );
+      state[action.payload.app].index = maxZIndex + 1;
     },
   },
 });
 
-export const { setAppTodoList, setAppNote,setPosition } = appControlSlice.actions;
+export const { setAppTodoList, setAppNote, setPosition, setIndex } =
+  appControlSlice.actions;
 
 export default appControlSlice.reducer;

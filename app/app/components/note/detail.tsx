@@ -30,7 +30,7 @@ const NoteDetail = () => {
       .then(function (response: any) {
         console.log(response);
         setTitleInput(response.title);
-        editorRef.current.setContent(response.text);
+        editorRef.current?.setContent(response.text);
       })
       .catch(function (error: any) {
         console.log(error);

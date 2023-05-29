@@ -1,7 +1,7 @@
 "use client";
 import dynamic from "next/dynamic";
 import { useAppDispatch, useAppSelector } from "../redux/hook";
-import { setPosition } from "../redux/slice/appControl.slice";
+import { setIndex, setPosition } from "../redux/slice/appControl.slice";
 
 const Dragable = dynamic(() => import("./components/dragable"), {
   ssr: false,
@@ -20,6 +20,7 @@ const AppFocusPage = () => {
   const { appTodoList, appNote } = useAppSelector((state) => state.appControl);
   const dispath = useAppDispatch();
   const onDragEnd = (e: any, app: any) => {
+    e.preventDefault();
     const { x, y } = e.target.getBoundingClientRect();
     dispath(
       setPosition({
@@ -31,6 +32,16 @@ const AppFocusPage = () => {
       })
     );
   };
+
+  const onDragStart = (e: any, app: any) => {
+    e.preventDefault();
+    dispath(
+      setIndex({
+        app,
+      })
+    );
+  };
+
   return (
     <div className="w-screen h-screen relative overflow-hidden">
       {/* right */}
@@ -42,7 +53,9 @@ const AppFocusPage = () => {
             id="appTodoList"
             x={appTodoList.position.x}
             y={appTodoList.position.y}
+            index={appTodoList.index}
             onDragEnd={(e: any) => onDragEnd(e, "appTodoList")}
+            onDragStart={(e: any) => onDragStart(e, "appTodoList")}
           >
             <TodoListMain />
           </Dragable>
@@ -52,7 +65,9 @@ const AppFocusPage = () => {
             id="appNote"
             x={appNote.position.x}
             y={appNote.position.y}
+            index={appNote.index}
             onDragEnd={(e: any) => onDragEnd(e, "appNote")}
+            onDragStart={(e: any) => onDragStart(e, "appNote")}
           >
             <NoteMain />
           </Dragable>
