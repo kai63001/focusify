@@ -7,6 +7,7 @@ import useAppwrite from "@/app/hook/appwrite";
 import { useEffect, useState } from "react";
 import { CollectionId, DatabaseId } from "@/libs/database";
 import dayjs from "@/libs/day";
+import { Query } from "appwrite";
 
 const NoteMain = () => {
   const { databases } = useAppwrite();
@@ -24,7 +25,10 @@ const NoteMain = () => {
     const result = databases.listDocuments(
       DatabaseId.focusifyApp,
       CollectionId.note,
-      []
+      [
+        //order by date
+        Query.orderDesc("$updatedAt")	
+      ],
     );
     result
       .then(function (response: any) {
@@ -34,7 +38,7 @@ const NoteMain = () => {
       .catch(function (error: any) {
         console.log(error);
       });
-  }, [databases]);
+  }, [databases, selectedNote]);
 
   if (selectedNote !== "") {
     return <NoteDetail />;
@@ -92,9 +96,9 @@ const NoteMain = () => {
               >
                 <p className="text-lg">{item.title}</p>
                 <p className="text-sm text-gray-400">
-                  {dayjs().diff(item.$createdAt, "day") > 1
-                    ? dayjs(item.$createdAt).format("DD/MM/YYYY")
-                    : dayjs(item.$createdAt).fromNow()}
+                  {dayjs().diff(item.$updatedAt, "day") > 1
+                    ? dayjs(item.$updatedAt).format("DD/MM/YYYY")
+                    : dayjs(item.$updatedAt).fromNow()}
                 </p>
               </div>
             ))}

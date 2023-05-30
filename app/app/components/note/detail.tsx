@@ -6,14 +6,15 @@ import { CollectionId, DatabaseId } from "@/libs/database";
 import { ID } from "appwrite";
 import { Editor } from "@tinymce/tinymce-react";
 import { useEffect, useRef, useState } from "react";
-
+import { useAlert } from "@/app/hook/AlertContext";
 const NoteDetail = () => {
+  const { openAlert, toastAlert, closeAlert }: any = useAlert();
   const selectedNote = useAppSelector((state) => state.note.selectedNote);
   const { databases } = useAppwrite();
   const editorRef: any = useRef(null);
   const [titleInput, setTitleInput] = useState("");
-
   const dispath = useAppDispatch();
+
   const backToMain = () => {
     dispath(setSelectNote(""));
   };
@@ -45,6 +46,13 @@ const NoteDetail = () => {
     updateNote();
   };
 
+  const alertSaveSuccess = () => {
+    toastAlert("Save success");
+    setTimeout(() => {
+      closeAlert();
+    }, 1000);
+  };
+
   const updateNote = () => {
     if (!databases) return;
     const result = databases.updateDocument(
@@ -59,6 +67,7 @@ const NoteDetail = () => {
     result
       .then(function (response: any) {
         console.log(response);
+        alertSaveSuccess();
       })
       .catch(function (error: any) {
         console.log(error);
@@ -78,11 +87,44 @@ const NoteDetail = () => {
     );
     result
       .then(function (response: any) {
+        dispath(setSelectNote(response.$id));
         console.log(response);
+        alertSaveSuccess();
       })
       .catch(function (error: any) {
         console.log(error);
       });
+  };
+
+  const handleDeleteNote = () => {
+    openAlert(
+      "Are you sure you want to delete this note?",
+      () => console.log("Cancel"),
+      () => {
+        deleteNote();
+      }
+    );
+
+    const deleteNote = () => {
+      if (!databases) return;
+      const result = databases.deleteDocument(
+        DatabaseId.focusifyApp,
+        CollectionId.note,
+        selectedNote
+      );
+      result
+        .then(function (response: any) {
+          toastAlert("Delete success");
+          setTimeout(() => {
+            closeAlert();
+            backToMain();
+          }, 1000);
+          console.log(response);
+        })
+        .catch(function (error: any) {
+          console.log(error);
+        });
+    };
   };
 
   return (
@@ -106,7 +148,14 @@ const NoteDetail = () => {
           </div>
           <div className="w-full cursor-grab handle"></div>
           <div className="px-5 pt-4 pb-2 items-center flex space-x-2">
-            <i onClick={handleSaveNote} className="fi fi-sr-disk text-lg cursor-pointer"></i>
+            <i
+              onClick={handleDeleteNote}
+              className="fi fi-sr-trash text-lg cursor-pointer border-r border-gray-500 pr-1"
+            ></i>
+            <i
+              onClick={handleSaveNote}
+              className="fi fi-sr-disk text-lg cursor-pointer"
+            ></i>
           </div>
         </div>
         <div className="px-5 pt-2 pb-5">
@@ -132,14 +181,6 @@ const NoteDetail = () => {
                 "removeformat | help",
             }}
           />
-          {/* <div className="flex justify-end mt-2 mb-2">
-            <button
-              onClick={handleAddNote}
-              className="bg-primaryLight px-4 py-2 rounded-md"
-            >
-              Save
-            </button>
-          </div> */}
         </div>
       </div>
     </motion.div>
