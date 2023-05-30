@@ -46,7 +46,7 @@ const TodoListMain = () => {
       }}
     >
       {checkLogin() && (
-        <div className="opacity-0 hover:opacity-100 duration-300 absolute w-full h-full bg-black bg-opacity-25 backdrop-blur-lg rounded-md handle flex">
+        <div className="opacity-0 hover:opacity-100 z-20 duration-300 absolute w-full h-full bg-black bg-opacity-25 backdrop-blur-sm rounded-md handle flex">
           <div className="m-auto">
             {/* need login first */}
             <p className="text-white text-center">
