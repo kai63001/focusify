@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useAppDispatch } from "@/app/redux/hook";
 import { setOpenApp } from "@/app/redux/slice/appControl.slice";
 import { motion } from "framer-motion";
 
 const PomodoroMain = () => {
   const dispatch = useAppDispatch();
+  const intervalIdRef: any = useRef(null); // Add this line
   const closePomodoroApp = () => {
     dispatch(setOpenApp({ app: "appPomodoro", isShow: false }));
   };
@@ -12,14 +13,13 @@ const PomodoroMain = () => {
   const [timerState, setTimerState] = useState("stopped"); // "stopped", "running", or "paused"
   const [timerSeconds, setTimerSeconds] = useState(25 * 60); // default to 25 minutes in seconds
   const [timerMode, setTimerMode] = useState("pomodoro"); // "pomodoro", "shortBreak", or "longBreak"
-  const [intervalId, setIntervalId] = useState(); // store intervalId so we can clear the interval when stopped
 
   const startTimer = () => {
     setTimerState("running");
-    const intervalId: any = setInterval(() => {
+    intervalIdRef.current = setInterval(() => {
       setTimerSeconds((prevSeconds) => {
         if (prevSeconds === 0) {
-          clearInterval(intervalId);
+          clearInterval(intervalIdRef.current);
           setTimerState("stopped");
           switch (timerMode) {
             case "pomodoro":
@@ -40,12 +40,11 @@ const PomodoroMain = () => {
         }
       });
     }, 1000);
-    setIntervalId(intervalId);
   };
 
   const pauseTimer = () => {
     setTimerState("paused");
-    clearInterval(intervalId);
+    clearInterval(intervalIdRef.current); // Modify this line
   };
 
   const resetTimer = () => {
@@ -110,6 +109,8 @@ const PomodoroMain = () => {
         <div className="flex space-x-4">
           <button
             onClick={() => {
+              setTimerState("stopped");
+              clearInterval(intervalIdRef.current);
               setTimerMode("pomodoro");
               setTimerSeconds(25 * 60);
             }}
@@ -121,6 +122,8 @@ const PomodoroMain = () => {
           </button>
           <button
             onClick={() => {
+              setTimerState("stopped");
+              clearInterval(intervalIdRef.current);
               setTimerMode("shortBreak");
               setTimerSeconds(5 * 60);
             }}
@@ -132,6 +135,8 @@ const PomodoroMain = () => {
           </button>
           <button
             onClick={() => {
+              setTimerState("stopped");
+              clearInterval(intervalIdRef.current);
               setTimerMode("longBreak");
               setTimerSeconds(15 * 60);
             }}
@@ -151,9 +156,19 @@ const PomodoroMain = () => {
         </div>
         <div className="flex space-x-4">
           {timerState === "stopped" || timerState === "paused" ? (
-            <button className={'bg-primaryLight text-white px-4 py-2 rounded-md'} onClick={startTimer}>Start</button>
+            <button
+              className={"bg-primaryLight text-white px-4 py-2 rounded-md"}
+              onClick={startTimer}
+            >
+              Start
+            </button>
           ) : (
-            <button onClick={pauseTimer}>Pause</button>
+            <button
+              className={"bg-primaryDark2 text-white px-4 py-2 rounded-md"}
+              onClick={pauseTimer}
+            >
+              Pause
+            </button>
           )}
           <button onClick={resetTimer}>Reset</button>
         </div>

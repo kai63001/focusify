@@ -91,7 +91,15 @@ const MainMusicBox = () => {
 
   return (
     <>
-      <div className="px-5 h-8 bg-primary bg-opacity-75 backdrop-blur-xl rounded-md flex justify-center items-center space-x-3">
+      <motion.div
+      initial={{ scale: 0.7 }}
+      animate={{ scale: 1 }}
+      exit={{ scale: 0.7 }}
+      transition={{
+        type: "spring",
+        stiffness: 260,
+        damping: 20,
+      }} className="px-5 h-8 bg-primary bg-opacity-75 backdrop-blur-xl rounded-md flex justify-center items-center space-x-3">
         <svg
           onClick={handlePrev}
           className="cursor-pointer w-5 h-5"
@@ -155,8 +163,16 @@ const MainMusicBox = () => {
             />
           </motion.div>
         )}
-      </div>
-      <div className="px-5 h-8 bg-primary bg-opacity-75 backdrop-blur-xl rounded-md flex justify-center items-center space-x-3">
+      </motion.div>
+      <motion.div
+      initial={{ scale: 0.7 }}
+      animate={{ scale: 1 }}
+      exit={{ scale: 0.7 }}
+      transition={{
+        type: "spring",
+        stiffness: 260,
+        damping: 20,
+      }} className="px-5 h-8 bg-primary bg-opacity-75 backdrop-blur-xl rounded-md flex justify-center items-center space-x-3">
         {/* loop with icon */}
 
         <i
@@ -180,7 +196,7 @@ const MainMusicBox = () => {
             fill="currentColor"
           />
         </svg>
-      </div>
+      </motion.div>
     </>
   );
 };

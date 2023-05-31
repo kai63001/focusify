@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 
 const MainAmbientBox = () => {
@@ -95,51 +96,72 @@ const MainAmbientBox = () => {
   }, [audioList, volumeList]);
 
   return (
-    <div className="relative">
-      <div className="px-5 h-8 bg-primary bg-opacity-75 backdrop-blur-xl rounded-md flex justify-center items-center space-x-3">
-        <i
-          onClick={() => setIsOpen(!isOpen)}
-          className="fi fi-rr-waveform-path mt-1 cursor-pointer"
-        ></i>
-        {isOpen && (
-          <div className="absolute z-50 top-full bg-primary bg-opacity-75 backdrop-blur-xl rounded-md shadow-md mt-1 w-[500px] py-2">
-            <h2 className="text-2xl px-5 py-2 pb-5">Ambient Sound</h2>
-            <div className="grid grid-cols-3 gap-4 justify-center items-center">
-              {sounds.map((sound, i) => (
-                <div key={i} className="px-5">
-                  <div
-                    onClick={() => handleSoundSelect(sound)}
-                    className="flex flex-col justify-center items-center space-x-2 cursor-pointer text-center"
-                  >
-                    <i
-                      className={`${sound.icon} text-2xl text-center ${
-                        selectedSounds.includes(sound) && "text-red-500"
-                      }`}
-                    ></i>
-                    <p className="text-center">{sound.name}</p>
+    <motion.div
+      initial={{ scale: 0.7 }}
+      animate={{ scale: 1 }}
+      exit={{ scale: 0.7 }}
+      transition={{
+        type: "spring",
+        stiffness: 260,
+        damping: 20,
+      }}
+    >
+      <div className="relative">
+        <div className="px-5 h-8 bg-primary bg-opacity-75 backdrop-blur-xl rounded-md flex justify-center items-center space-x-3">
+          <i
+            onClick={() => setIsOpen(!isOpen)}
+            className="fi fi-rr-waveform-path mt-1 cursor-pointer"
+          ></i>
+          {isOpen && (
+            <motion.div
+              initial={{ scale: 0.7 }}
+              animate={{ scale: 1 }}
+              exit={{ scale: 0.7 }}
+              transition={{
+                type: "spring",
+                stiffness: 260,
+                damping: 20,
+              }}
+              className="absolute z-50 top-full bg-primary bg-opacity-75 backdrop-blur-xl rounded-md shadow-md mt-1 w-[500px] py-2"
+            >
+              <h2 className="text-2xl px-5 py-2 pb-5">Ambient Sound</h2>
+              <div className="grid grid-cols-3 gap-4 justify-center items-center">
+                {sounds.map((sound, i) => (
+                  <div key={i} className="px-5">
+                    <div
+                      onClick={() => handleSoundSelect(sound)}
+                      className="flex flex-col justify-center items-center space-x-2 cursor-pointer text-center"
+                    >
+                      <i
+                        className={`${sound.icon} text-2xl text-center ${
+                          selectedSounds.includes(sound) && "text-red-500"
+                        }`}
+                      ></i>
+                      <p className="text-center">{sound.name}</p>
+                    </div>
+                    {selectedSounds.includes(sound) ? (
+                      <input
+                        type="range"
+                        className="w-full h-6"
+                        min="0"
+                        max="1"
+                        step="0.01"
+                        value={volumeList[i]}
+                        onChange={(e) => {
+                          handleVolumeChange(e, sound, i);
+                        }}
+                      />
+                    ) : (
+                      <div className="h-7"></div>
+                    )}
                   </div>
-                  {selectedSounds.includes(sound) ? (
-                    <input
-                      type="range"
-                      className="w-full h-6"
-                      min="0"
-                      max="1"
-                      step="0.01"
-                      value={volumeList[i]}
-                      onChange={(e) => {
-                        handleVolumeChange(e, sound, i);
-                      }}
-                    />
-                  ) : (
-                    <div className="h-7"></div>
-                  )}
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
+                ))}
+              </div>
+            </motion.div>
+          )}
+        </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
