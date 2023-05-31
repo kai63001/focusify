@@ -2,6 +2,7 @@
 import dynamic from "next/dynamic";
 import { useAppDispatch, useAppSelector } from "../redux/hook";
 import { setIndex, setPosition } from "../redux/slice/appControl.slice";
+import PomodoroMain from "./components/pomodoro/main";
 
 const Dragable = dynamic(() => import("./components/dragable"), {
   ssr: false,
@@ -17,7 +18,7 @@ const NoteMain = dynamic(() => import("./components/note/main"), {
 });
 
 const AppFocusPage = () => {
-  const { appTodoList, appNote } = useAppSelector((state) => state.appControl);
+  const { appTodoList, appNote, appPomodoro } = useAppSelector((state) => state.appControl);
   const dispath = useAppDispatch();
   const onDragEnd = (e: any, app: any) => {
     e.preventDefault();
@@ -70,6 +71,18 @@ const AppFocusPage = () => {
             onDragStart={(e: any) => onDragStart(e, "appNote")}
           >
             <NoteMain />
+          </Dragable>
+        )}
+        {appPomodoro.isShow && (
+          <Dragable
+            id="appPomodoro"
+            x={appPomodoro.position.x}
+            y={appPomodoro.position.y}
+            index={appPomodoro.index}
+            onDragEnd={(e: any) => onDragEnd(e, "appPomodoro")}
+            onDragStart={(e: any) => onDragStart(e, "appPomodoro")}
+          >
+            <PomodoroMain />
           </Dragable>
         )}
       </div>
