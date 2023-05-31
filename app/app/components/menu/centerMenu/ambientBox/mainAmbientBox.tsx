@@ -4,27 +4,31 @@ const MainAmbientBox = () => {
   const [selectedSounds, setSelectedSounds] = useState<any[]>([]);
   const [sounds, setSounds] = useState<any[]>([
     {
+      id: 0,
       name: "Rain",
       url: "https://cloud.appwrite.io/v1/storage/buckets/647617e7f3c9f268c1f5/files/6476c7ece074568124c1/view?project=646bba5e9c9dd4ddcb4b&mode=admin",
       icon: "fi fi-rr-cloud-rain",
     },
     {
+      id: 1,
       name: "Campfire",
       url: "https://cloud.appwrite.io/v1/storage/buckets/647617e7f3c9f268c1f5/files/6476bd688099e1f82b63/view?project=646bba5e9c9dd4ddcb4b&mode=admin",
       icon: "fi fi-sr-camping",
     },
     {
+      id: 2,
       name: "Forest",
       url: "https://cloud.appwrite.io/v1/storage/buckets/647617e7f3c9f268c1f5/files/6476d146caf20266d5d4/view?project=646bba5e9c9dd4ddcb4b&mode=admin",
       icon: "fi fi-rr-tree",
     },
   ]);
-  const [volumeList, setVolumeList] = useState<number[]>([0.5, 0.5]);
+  const [volumeList, setVolumeList] = useState<number[]>([]);
+  const [audioList, setAudioList] = useState<any[]>([]);
 
   //useEffect to set volumeList
   useEffect(() => {
     setVolumeList(
-      sounds.map(() => {
+      sounds.map((item) => {
         return 0.5;
       })
     );
@@ -43,22 +47,18 @@ const MainAmbientBox = () => {
     else {
       setSelectedSounds([...selectedSounds, sound]);
     }
-    console.log(selectedSounds);
   };
 
   const handleVolumeChange = (
     event: React.ChangeEvent<HTMLInputElement>,
-    sound: any
+    sound: any,
+    index: number
   ) => {
+    console.log(index);
     const value = parseFloat(event.target.value);
-    setVolumeList(
-      volumeList.map((volume, i) => {
-        if (i === sounds.indexOf(sound)) {
-          return value;
-        }
-        return volume;
-      })
-    );
+    const newVolumeList = [...volumeList];
+    newVolumeList[index] = value;
+    setVolumeList(newVolumeList);
   };
 
   useEffect(() => {
@@ -66,7 +66,8 @@ const MainAmbientBox = () => {
     const audioObjects = selectedSounds.map((sound, i) => {
       const audio = new Audio(sound.url);
       audio.loop = true;
-      audio.volume = volumeList[i];
+      audio.volume = 0.5;
+      audio.id = sound.id;
       const playPromise = audio.play();
       if (playPromise !== undefined) {
         playPromise
@@ -80,16 +81,19 @@ const MainAmbientBox = () => {
 
       return audio;
     });
-
-    if (selectedSounds.length === 0) {
-      return;
-    }
+    setAudioList(audioObjects);
 
     // Return a cleanup function that pauses all the Audio objects
     return () => {
       Promise.all(audioObjects.map((audio) => audio.pause()));
     };
-  }, [selectedSounds, volumeList]);
+  }, [selectedSounds]);
+
+  useEffect(() => {
+    audioList.forEach((audio, i) => {
+      audio.volume = volumeList[audio.id];
+    });
+  }, [audioList, volumeList]);
 
   return (
     <div className="relative">
@@ -123,7 +127,7 @@ const MainAmbientBox = () => {
                       step="0.01"
                       value={volumeList[i]}
                       onChange={(e) => {
-                        handleVolumeChange(e, sound);
+                        handleVolumeChange(e, sound, i);
                       }}
                     />
                   ) : (
