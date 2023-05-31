@@ -13,6 +13,7 @@ const NoteDetail = () => {
   const { databases } = useAppwrite();
   const editorRef: any = useRef(null);
   const [titleInput, setTitleInput] = useState("");
+  const [detail, setDetail] = useState<any>("");
   const dispath = useAppDispatch();
 
   const backToMain = () => {
@@ -31,6 +32,7 @@ const NoteDetail = () => {
       .then(function (response: any) {
         console.log(response);
         setTitleInput(response.title);
+        setDetail(response.text);
         editorRef.current?.setContent(response.text);
       })
       .catch(function (error: any) {
@@ -168,6 +170,7 @@ const NoteDetail = () => {
           />
           <Editor
             onInit={(evt, editor) => (editorRef.current = editor)}
+            initialValue={detail}
             apiKey="3sebmkk1m4t8x0vcudqws9lwdz2pqzs60giqdco3yfhleubs"
             init={{
               skin: "oxide-dark",
