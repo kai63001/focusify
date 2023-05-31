@@ -44,11 +44,12 @@ const PomodoroMain = () => {
 
   const pauseTimer = () => {
     setTimerState("paused");
-    clearInterval(intervalIdRef.current); // Modify this line
+    clearInterval(intervalIdRef.current); //clear timer
   };
 
   const resetTimer = () => {
     setTimerState("stopped");
+    clearInterval(intervalIdRef.current); //clear timer
     switch (timerMode) {
       case "pomodoro":
         setTimerSeconds(25 * 60);
@@ -170,7 +171,9 @@ const PomodoroMain = () => {
               Pause
             </button>
           )}
-          <button onClick={resetTimer}>Reset</button>
+          <button onClick={resetTimer}>
+            <i className="fi fi-br-refresh"></i>
+          </button>
         </div>
       </div>
     </motion.div>
