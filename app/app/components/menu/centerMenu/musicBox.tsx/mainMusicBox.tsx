@@ -180,7 +180,6 @@ const MainMusicBox = () => {
             fill="currentColor"
           />
         </svg>
-
       </div>
     </>
   );
