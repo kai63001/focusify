@@ -54,7 +54,6 @@ const MainAmbientBox = () => {
     sound: any,
     index: number
   ) => {
-    console.log(index);
     const value = parseFloat(event.target.value);
     const newVolumeList = [...volumeList];
     newVolumeList[index] = value;
@@ -103,7 +102,8 @@ const MainAmbientBox = () => {
           className="fi fi-rr-waveform-path mt-1 cursor-pointer"
         ></i>
         {isOpen && (
-          <div className="absolute z-50 top-full bg-primary bg-opacity-75 backdrop-blur-xl rounded-md shadow-md mt-1 w-[500px] py-5">
+          <div className="absolute z-50 top-full bg-primary bg-opacity-75 backdrop-blur-xl rounded-md shadow-md mt-1 w-[500px] py-2">
+            <h2 className="text-2xl px-5 py-2 pb-5">Ambient Sound</h2>
             <div className="grid grid-cols-3 gap-4 justify-center items-center">
               {sounds.map((sound, i) => (
                 <div key={i} className="px-5">
