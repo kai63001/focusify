@@ -2,7 +2,6 @@
 import dynamic from "next/dynamic";
 import { useAppDispatch, useAppSelector } from "../redux/hook";
 import { setIndex, setPosition } from "../redux/slice/appControl.slice";
-import PomodoroMain from "./components/pomodoro/main";
 
 const Dragable = dynamic(() => import("./components/dragable"), {
   ssr: false,
@@ -16,9 +15,18 @@ const TodoListMain = dynamic(() => import("./components/todoList/main"), {
 const NoteMain = dynamic(() => import("./components/note/main"), {
   ssr: false,
 });
+const PomodoroMain = dynamic(() => import("./components/pomodoro/main"), {
+  ssr: false,
+});
+const YoutubeMain = dynamic(() => import("./components/youtube/main"), {
+  ssr: false,
+});
+
 
 const AppFocusPage = () => {
-  const { appTodoList, appNote, appPomodoro } = useAppSelector((state) => state.appControl);
+  const { appTodoList, appNote, appPomodoro, appYoutube } = useAppSelector(
+    (state) => state.appControl
+  );
   const dispath = useAppDispatch();
   const onDragEnd = (e: any, app: any) => {
     e.preventDefault();
@@ -83,6 +91,18 @@ const AppFocusPage = () => {
             onDragStart={(e: any) => onDragStart(e, "appPomodoro")}
           >
             <PomodoroMain />
+          </Dragable>
+        )}
+        {appYoutube.isShow && (
+          <Dragable
+            id="appYoutube"
+            x={appYoutube.position.x}
+            y={appYoutube.position.y}
+            index={appYoutube.index}
+            onDragEnd={(e: any) => onDragEnd(e, "appYoutube")}
+            onDragStart={(e: any) => onDragStart(e, "appYoutube")}
+          >
+            <YoutubeMain />
           </Dragable>
         )}
       </div>

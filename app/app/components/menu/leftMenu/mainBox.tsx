@@ -11,6 +11,10 @@ const OpenNote = dynamic(() => import("./tools/note/openNote"), {
 const OpenPomodoro = dynamic(() => import("./tools/pomodoro/openPomodoro"), {
   ssr: false,
 });
+const OpenYoutube = dynamic(() => import("./tools/youtube/openYoutube"), {
+  ssr: false,
+});
+
 
 const MainBoxMenuList = () => {
   return (
@@ -28,6 +32,7 @@ const MainBoxMenuList = () => {
       <OpenToDoList />
       <OpenNote />
       <OpenPomodoro />
+      <OpenYoutube />
     </motion.div>
   );
 };
