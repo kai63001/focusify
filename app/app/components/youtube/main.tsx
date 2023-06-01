@@ -3,10 +3,37 @@ import { setOpenApp } from "@/app/redux/slice/appControl.slice";
 import { motion } from "framer-motion";
 import { Resizable } from "re-resizable";
 import DragCorner from "./dragCornert";
-import { useState } from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 
 const YoutubeMain = () => {
+  const recommededList = [
+    {
+      id: 1,
+      title: "A rainy evening in malmö ~ nordic lofi mix",
+      thumbnail: "https://i.ytimg.com/vi/9pSjmD5YYe8/maxresdefault.jpg",
+      url: "https://www.youtube.com/embed/9pSjmD5YYe8",
+    },
+    {
+      id: 2,
+      title: "Rainy Night in An Empty Alley - Lofi Anime Mix",
+      thumbnail: "https://i.ytimg.com/vi/sH7DNJj4vus/maxresdefault.jpg",
+      url: "https://www.youtube.com/embed/sH7DNJj4vus",
+    },
+    {
+      id: 3,
+      title: "Old songs but it's lofi remix",
+      thumbnail: "https://i.ytimg.com/vi/Mm8KG33KMME/maxresdefault.jpg",
+      url: "https://www.youtube.com/embed/Mm8KG33KMME",
+    },
+    {
+        id: 4,
+        title: "Lofi English Songs 💜 Calm Lofi & Beautiful Relaxing Background Music",
+        thumbnail: "https://i.ytimg.com/vi/agpXtOUfC94/maxresdefault.jpg",
+        url: "https://www.youtube.com/embed/agpXtOUfC94",
+    }
+  ];
+
   const dispatch = useAppDispatch();
   const closeApp = () => {
     dispatch(setOpenApp({ app: "appYoutube", isShow: false }));
@@ -124,19 +151,31 @@ const YoutubeMain = () => {
                   height: heightWidget - 130,
                 }}
               >
-                <div className="relative h-[135px] w-full aspect-ratio-1 cursor-pointer">
-                  <Image
-                    className="rounded-md"
-                    src="https://picsum.photos/400/400"
-                    alt="Image 1"
-                    fill
-                    style={{
-                      width: "100%",
-                      height: "100%",
-                      objectFit: "cover",
-                    }}
-                  />
-                </div>
+                {recommededList.map((item: any, index: any) => (
+                  <div key={index}>
+                    <div
+                      className="relative h-[135px] w-full aspect-ratio-1 cursor-pointer"
+                      onClick={(e) => {
+                        setUrlPlay(item.url);
+                      }}
+                    >
+                      <Image
+                        className="rounded-md"
+                        src={item.thumbnail}
+                        alt="Image 1"
+                        fill
+                        style={{
+                          width: "100%",
+                          height: "100%",
+                          objectFit: "cover",
+                        }}
+                      />
+                    </div>
+                    <p className="text-sm flex-nowrap text-ellipsis overflow-auto">
+                      {item.title}
+                    </p>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
