@@ -1,6 +1,7 @@
 'use client';
 
 import { useAppDispatch} from "@/app/redux/hook"
+import { closeAllApp } from "@/app/redux/slice/appControl.slice";
 import { setLoginModal } from "@/app/redux/slice/login.slice";
 
 const LoginButton = () => {
@@ -10,7 +11,12 @@ const LoginButton = () => {
     dispatch(setLoginModal({
       openModal: true,
     }))
+    closeAllModal();
   }
+
+  const closeAllModal = () => {
+    dispatch(closeAllApp());
+  };
 
   return (
     <div onClick={handleLogin} className="bg-primary bg-opacity-75 backdrop-blur-xl px-5 h-8 rounded-md flex cursor-pointer">

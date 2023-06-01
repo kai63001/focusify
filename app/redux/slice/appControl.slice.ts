@@ -103,9 +103,15 @@ export const appControlSlice = createSlice({
       }
       state[action.payload.app].index = maxZIndex + 1;
     },
+    closeAllApp: (state: any) => {
+      Object.values(state).forEach((app: any) => {
+        app.isShow = false;
+      });
+    },
   },
 });
 
-export const { setOpenApp, setPosition, setIndex } = appControlSlice.actions;
+export const { setOpenApp, setPosition, setIndex, closeAllApp } =
+  appControlSlice.actions;
 
 export default appControlSlice.reducer;

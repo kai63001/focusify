@@ -118,23 +118,15 @@ const YoutubeMain = () => {
             )}
             <div>
               <p className="pt-3 pb-1 text-lg">Recommeded Videos</p>
-              <div className="grid grid-cols-2 gap-4 overflow-scroll no-scrollbar" style={{
-                height: heightWidget - 130
-              }}>
-                <div className="relative h-[135px] w-full aspect-ratio-1">
+              <div
+                className="grid grid-cols-2 gap-4 overflow-scroll no-scrollbar"
+                style={{
+                  height: heightWidget - 130,
+                }}
+              >
+                <div className="relative h-[135px] w-full aspect-ratio-1 cursor-pointer">
                   <Image
-                    src="https://picsum.photos/400/400"
-                    alt="Image 1"
-                    fill
-                    style={{
-                      width: "100%",
-                      height: "100%",
-                      objectFit: "cover",
-                    }}
-                  />
-                </div>
-                <div className="relative h-[135px] w-full aspect-ratio-1">
-                  <Image
+                    className="rounded-md"
                     src="https://picsum.photos/400/400"
                     alt="Image 1"
                     fill

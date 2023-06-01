@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 import AccountMenu from "./accountMenu";
 
 const HandleAuth = () => {
-  const { account, client } = appwrite();
+  const { account } = appwrite();
   const loginSelector = useAppSelector((state: { login: any; }) => state.login);
   const dispatch = useAppDispatch();
   const [userData, setUserData] = useState<any>(null);
