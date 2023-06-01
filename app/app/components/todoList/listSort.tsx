@@ -111,7 +111,7 @@ const ToDoListSort = ({ onTask = 0 }: { onTask?: number }) => {
     >
       <SortableContext items={items} strategy={verticalListSortingStrategy}>
         {items.length === 0 && (
-          <p className="text-[#eaeaea] text-center">No items</p>
+          <p className="text-[#eaeaea] text-center py-3">No items</p>
         )}
         {items.map((data: any, index: number) => (
           <motion.div
