@@ -107,7 +107,7 @@ const MainAmbientBox = () => {
       }}
     >
       <div className="relative">
-        <div className="px-5 h-8 bg-primary bg-opacity-75 backdrop-blur-xl rounded-md flex justify-center items-center space-x-3">
+        <div className="w-8 h-8 bg-primary bg-opacity-75 backdrop-blur-xl rounded-md flex justify-center items-center space-x-3">
           <i
             onClick={() => setIsOpen(!isOpen)}
             className={`fi fi-rr-waveform-path mt-1 cursor-pointer ${selectedSounds.length > 0 && "text-red-500"}`}
