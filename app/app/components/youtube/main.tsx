@@ -27,11 +27,12 @@ const YoutubeMain = () => {
       url: "https://www.youtube.com/embed/Mm8KG33KMME",
     },
     {
-        id: 4,
-        title: "Lofi English Songs 💜 Calm Lofi & Beautiful Relaxing Background Music",
-        thumbnail: "https://i.ytimg.com/vi/agpXtOUfC94/maxresdefault.jpg",
-        url: "https://www.youtube.com/embed/agpXtOUfC94",
-    }
+      id: 4,
+      title:
+        "Lofi English Songs 💜 Calm Lofi & Beautiful Relaxing Background Music",
+      thumbnail: "https://i.ytimg.com/vi/agpXtOUfC94/maxresdefault.jpg",
+      url: "https://www.youtube.com/embed/agpXtOUfC94",
+    },
   ];
 
   const dispatch = useAppDispatch();
@@ -148,7 +149,7 @@ const YoutubeMain = () => {
               <div
                 className="grid grid-cols-2 gap-4 overflow-scroll no-scrollbar"
                 style={{
-                  height: heightWidget - 130,
+                  height: heightWidget - 135,
                 }}
               >
                 {recommededList.map((item: any, index: any) => (
@@ -184,7 +185,7 @@ const YoutubeMain = () => {
             <iframe
               width="100%"
               height="100%"
-              src={urlPlay}
+              src={`${urlPlay}?autoplay=1`}
               title="YouTube video player"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowFullScreen

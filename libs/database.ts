@@ -1,5 +1,6 @@
 export enum DatabaseId {
   focusifyApp = "646f7eb7278c10eedaec",
+  appController = "6478c21d29a2d5411d9e"
 }
 
 export enum CollectionId {
