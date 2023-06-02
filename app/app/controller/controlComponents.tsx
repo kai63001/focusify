@@ -6,9 +6,6 @@ import { setIndex, setPosition } from "@/app/redux/slice/appControl.slice";
 const Dragable = dynamic(() => import("../components/dragable"), {
   ssr: false,
 });
-const MainList = dynamic(() => import("../components/menu/mainList"), {
-  ssr: false,
-});
 const TodoListMain = dynamic(() => import("../components/todoList/main"), {
   ssr: false,
 });
@@ -21,8 +18,12 @@ const PomodoroMain = dynamic(() => import("../components/pomodoro/main"), {
 const YoutubeMain = dynamic(() => import("../components/youtube/main"), {
   ssr: false,
 });
+const MusicInfoMain = dynamic(() => import("../components/musicInfo/main"), {
+  ssr: false,
+});
+
 const ControlComponents = () => {
-  const { appTodoList, appNote, appPomodoro, appYoutube } = useAppSelector(
+  const { appTodoList, appNote, appPomodoro, appYoutube,appMusicInfo } = useAppSelector(
     (state) => state.appControl
   );
   const dispath = useAppDispatch();
@@ -98,6 +99,18 @@ const ControlComponents = () => {
           <YoutubeMain />
         </Dragable>
       )}
+     {appMusicInfo.isShow && (
+        <Dragable
+          id="appMusicInfo"
+          x={appMusicInfo.position.x}
+          y={appMusicInfo.position.y}
+          index={appMusicInfo.index}
+          onDragEnd={(e: any) => onDragEnd(e, "appMusicInfo")}
+          onDragStart={(e: any) => onDragStart(e, "appMusicInfo")}
+        >
+          <MusicInfoMain />
+        </Dragable>
+      )} 
     </div>
   );
 };

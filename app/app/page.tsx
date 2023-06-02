@@ -14,7 +14,7 @@ const ControlComponents = dynamic(
 const AppFocusPage = () => {
   return (
     <div className="w-screen h-screen relative overflow-hidden">
-      {/* right */}
+      {/* menu */}
       <MainList />
       {/* dragable */}
       <ControlComponents />
