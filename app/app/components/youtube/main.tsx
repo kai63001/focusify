@@ -163,7 +163,8 @@ const YoutubeMain = () => {
                       <Image
                         className="rounded-md"
                         src={item.thumbnail}
-                        alt="Image 1"
+                        alt={item.title}
+                        sizes="100%"
                         fill
                         style={{
                           width: "100%",

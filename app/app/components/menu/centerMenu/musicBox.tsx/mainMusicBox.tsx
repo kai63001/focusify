@@ -69,7 +69,7 @@ const MainMusicBox = () => {
         dispath(setMusicPlaying(selectMusic));
       }
     }
-  }, [dispath, listMusic, listMusic.length, selectMusic]);
+  }, [dispath, listMusic, listMusic.length, musicPlaying, selectMusic]);
 
   //check volume
   useEffect(() => {
@@ -83,6 +83,7 @@ const MainMusicBox = () => {
       if (isPlaying) {
         audioRef.current.pause();
         dispath(setMusicPlaying(""));
+        dispath(setSelectMusic(""));
       } else {
         audioRef.current.play();
         //set music playing
