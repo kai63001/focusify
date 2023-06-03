@@ -23,7 +23,13 @@ const LogoutPage = () => {
     logout();
   }, [account, client]);
 
-  return <div>Logging out...</div>;
+  return (
+    <div className="flex w-screen h-screen bg-black">
+      <div className="m-auto text-center">
+        <h1>Logging out...</h1>
+      </div>
+    </div>
+  );
 };
 
 export default LogoutPage;
