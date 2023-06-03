@@ -1,7 +1,11 @@
 "use client";
 import useAppwrite from "@/app/hook/appwrite";
 import { useAppDispatch, useAppSelector } from "@/app/redux/hook";
-import { setListMusic, setMusicPlaying } from "@/app/redux/slice/music.slice";
+import {
+  setListMusic,
+  setMusicPlaying,
+  setSelectMusic,
+} from "@/app/redux/slice/music.slice";
 import { CollectionId, DatabaseId } from "@/libs/database";
 import { motion } from "framer-motion";
 import { useState, useRef, useEffect } from "react";
@@ -9,7 +13,9 @@ import { useState, useRef, useEffect } from "react";
 const MainMusicBox = () => {
   const { databases } = useAppwrite();
   const dispath = useAppDispatch();
-  const listMusic = useAppSelector((state) => state.music.listMusic);
+  const { listMusic, selectMusic, musicPlaying } = useAppSelector(
+    (state) => state.music
+  );
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMute, setIsMute] = useState(false);
   const [volume, setVolume] = useState(localStorage.getItem("volume") || 0.5);
@@ -34,6 +40,36 @@ const MainMusicBox = () => {
     };
     getAllMusic();
   }, [databases, dispath]);
+
+  //useEffect check select music
+  useEffect(() => {
+    if (
+      listMusic.length > 0 &&
+      selectMusic &&
+      audioRef.current &&
+      selectMusic != musicPlaying
+    ) {
+      // audioRef.current.src = listMusic[nextTrack].url;
+      // filter music
+      const music = listMusic.filter((music) => music.$id === selectMusic);
+      if (music.length > 0) {
+        setCurrentTrack(
+          listMusic.findIndex((music) => music.$id === selectMusic)
+        );
+        audioRef.current.src = music[0].url;
+        audioRef.current
+          .play()
+          .then((_) => {
+            if (audioRef.current) return;
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+        setIsPlaying(true);
+        dispath(setMusicPlaying(selectMusic));
+      }
+    }
+  }, [dispath, listMusic, listMusic.length, selectMusic]);
 
   //check volume
   useEffect(() => {
@@ -94,6 +130,7 @@ const MainMusicBox = () => {
       setCurrentTrack(nextTrack);
       audioRef.current.src = listMusic[nextTrack].url;
       dispath(setMusicPlaying(listMusic[nextTrack].$id));
+      dispath(setSelectMusic(listMusic[nextTrack].$id));
       audioRef.current.play();
       setIsPlaying(true);
     }
@@ -106,6 +143,7 @@ const MainMusicBox = () => {
       setCurrentTrack(prevTrack);
       audioRef.current.src = listMusic[prevTrack].url;
       dispath(setMusicPlaying(listMusic[prevTrack].$id));
+      dispath(setSelectMusic(listMusic[prevTrack].$id));
       audioRef.current.play();
       setIsPlaying(true);
     }

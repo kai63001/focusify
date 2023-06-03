@@ -1,5 +1,6 @@
 import { useAppDispatch, useAppSelector } from "@/app/redux/hook";
 import { setOpenApp } from "@/app/redux/slice/appControl.slice";
+import { setSelectMusic } from "@/app/redux/slice/music.slice";
 import { motion } from "framer-motion";
 
 const MainMusicInfo = () => {
@@ -8,6 +9,10 @@ const MainMusicInfo = () => {
 
   const closeApp = () => {
     dispatch(setOpenApp({ app: "appMusicInfo", isShow: false }));
+  };
+
+  const selectMusicToPlay = (music: any) => {
+    dispatch(setSelectMusic(music));
   };
   return (
     <motion.div
@@ -35,6 +40,7 @@ const MainMusicInfo = () => {
         {listMusic.map((music, index) => (
           <div
             key={index}
+            onClick={() => selectMusicToPlay(music.$id)}
             className={`flex items-center justify-between px-5 py-2 cursor-pointer rounded-md ${
               musicPlaying == music.$id ? "bg-primaryLight text-white" : ""
             }}`}
@@ -48,7 +54,13 @@ const MainMusicInfo = () => {
                 )}
               </div>
               <div className="flex flex-col w-10/12">
-                <p className={`font-bold text-lg ${musicPlaying == music.$id ? 'text-red-500' : 'text-ellipsis overflow-hidden whitespace-nowrap'}`}>
+                <p
+                  className={`font-bold text-lg ${
+                    musicPlaying == music.$id
+                      ? "text-red-500"
+                      : "text-ellipsis overflow-hidden whitespace-nowrap"
+                  }`}
+                >
                   {music.name}
                 </p>
                 <span className="text-xs text-gray-400">{music.author}</span>
