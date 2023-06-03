@@ -1,7 +1,15 @@
+"use client";
+import useAppwrite from "@/app/hook/appwrite";
+import { useAppDispatch, useAppSelector } from "@/app/redux/hook";
+import { setListMusic, setMusicPlaying } from "@/app/redux/slice/music.slice";
+import { CollectionId, DatabaseId } from "@/libs/database";
 import { motion } from "framer-motion";
 import { useState, useRef, useEffect } from "react";
 
 const MainMusicBox = () => {
+  const { databases } = useAppwrite();
+  const dispath = useAppDispatch();
+  const listMusic = useAppSelector((state) => state.music.listMusic);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMute, setIsMute] = useState(false);
   const [volume, setVolume] = useState(localStorage.getItem("volume") || 0.5);
@@ -11,13 +19,21 @@ const MainMusicBox = () => {
   const audioRef = useRef<HTMLAudioElement>(null);
   const [isShowVolume, setIsShowVolume] = useState(false);
 
-  const listMusic = [
-    "https://cloud.appwrite.io/v1/storage/buckets/647617e7f3c9f268c1f5/files/6476182b5e55501b6c63/view?project=646bba5e9c9dd4ddcb4b&mode=admin",
-    "https://cloud.appwrite.io/v1/storage/buckets/647617e7f3c9f268c1f5/files/647618390cc3efeddd0c/view?project=646bba5e9c9dd4ddcb4b&mode=admin",
-    "https://cloud.appwrite.io/v1/storage/buckets/647617e7f3c9f268c1f5/files/647618320ced7076fa11/view?project=646bba5e9c9dd4ddcb4b&mode=admin",
-    "https://cloud.appwrite.io/v1/storage/buckets/647617e7f3c9f268c1f5/files/6476203444c51d15f778/view?project=646bba5e9c9dd4ddcb4b&mode=admin",
-  ];
   const [currentTrack, setCurrentTrack] = useState(0);
+
+  //useEffect Check list music
+  useEffect(() => {
+    const getAllMusic = async () => {
+      if (!databases) return;
+      const res: any = await databases.listDocuments(
+        DatabaseId.appController,
+        CollectionId.musicList
+      );
+      console.log(res);
+      dispath(setListMusic(res.documents));
+    };
+    getAllMusic();
+  }, [databases, dispath]);
 
   //check volume
   useEffect(() => {
@@ -30,8 +46,12 @@ const MainMusicBox = () => {
     if (audioRef.current) {
       if (isPlaying) {
         audioRef.current.pause();
+        dispath(setMusicPlaying(""));
       } else {
         audioRef.current.play();
+        //set music playing
+        const musicPlaying = listMusic[currentTrack].$id;
+        dispath(setMusicPlaying(musicPlaying));
       }
       setIsPlaying(!isPlaying);
     }
@@ -72,7 +92,8 @@ const MainMusicBox = () => {
     if (audioRef.current) {
       const nextTrack = (currentTrack + 1) % listMusic.length;
       setCurrentTrack(nextTrack);
-      audioRef.current.src = listMusic[nextTrack];
+      audioRef.current.src = listMusic[nextTrack].url;
+      dispath(setMusicPlaying(listMusic[nextTrack].$id));
       audioRef.current.play();
       setIsPlaying(true);
     }
@@ -83,7 +104,8 @@ const MainMusicBox = () => {
       const prevTrack =
         (currentTrack - 1 + listMusic.length) % listMusic.length;
       setCurrentTrack(prevTrack);
-      audioRef.current.src = listMusic[prevTrack];
+      audioRef.current.src = listMusic[prevTrack].url;
+      dispath(setMusicPlaying(listMusic[prevTrack].$id));
       audioRef.current.play();
       setIsPlaying(true);
     }
@@ -133,13 +155,15 @@ const MainMusicBox = () => {
           />
         </svg>
 
-        <audio
-          ref={audioRef}
-          onTimeUpdate={handleTimeUpdate}
-          onEnded={handleSkip}
-        >
-          <source src={listMusic[currentTrack]} type="audio/mpeg" />
-        </audio>
+        {listMusic?.length > 0 && (
+          <audio
+            ref={audioRef}
+            onTimeUpdate={handleTimeUpdate}
+            onEnded={handleSkip}
+          >
+            <source src={listMusic[currentTrack].url} type="audio/mpeg" />
+          </audio>
+        )}
         {/* icon voulmn */}
         <i
           onClick={handleShowVolume}

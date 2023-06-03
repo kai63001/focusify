@@ -5,6 +5,7 @@ import loginReducer from "./slice/login.slice";
 import taskReducer from "./slice/task.slice";
 import appControlReducer from "./slice/appControl.slice";
 import noteReducer from "./slice/note.slice";
+import musicReducer from "./slice/music.slice";
 
 export const store = configureStore({
   reducer: {
@@ -13,6 +14,7 @@ export const store = configureStore({
     task: taskReducer,
     appControl: appControlReducer,
     note: noteReducer,
+    music: musicReducer,
   },
 });
 
