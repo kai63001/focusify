@@ -80,7 +80,6 @@ const ListWallpaper = () => {
       }
     );
     result
-
       .then(function (response: any) {
         console.log(response);
       })
@@ -129,6 +128,7 @@ const ListWallpaper = () => {
             </div>
             <Image
               className="rounded-md"
+              sizes="50vw, 33vw"
               src={wallpaper.url}
               alt={`wallpaper ${wallpaper.name}`}
               fill

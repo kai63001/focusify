@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useAppDispatch } from "@/app/redux/hook";
 import { setOpenApp } from "@/app/redux/slice/appControl.slice";
 import { motion } from "framer-motion";
@@ -14,42 +14,31 @@ const PomodoroMain = () => {
   const [timerSeconds, setTimerSeconds] = useState(25 * 60); // default to 25 minutes in seconds
   const [timerMode, setTimerMode] = useState("pomodoro"); // "pomodoro", "shortBreak", or "longBreak"
 
+  const workerRef: any = useRef(null);
+
   const startTimer = () => {
     setTimerState("running");
-    intervalIdRef.current = setInterval(() => {
-      setTimerSeconds((prevSeconds) => {
-        if (prevSeconds === 0) {
-          clearInterval(intervalIdRef.current);
-          setTimerState("stopped");
-          switch (timerMode) {
-            case "pomodoro":
-              setTimerSeconds(25 * 60);
-              break;
-            case "shortBreak":
-              setTimerSeconds(5 * 60);
-              break;
-            case "longBreak":
-              setTimerSeconds(15 * 60);
-              break;
-            default:
-              setTimerSeconds(25 * 60);
-          }
-          return timerSeconds;
-        } else {
-          return prevSeconds - 1;
-        }
-      });
-    }, 1000);
+    workerRef.current = new Worker("/timerWorker.js");
+
+    workerRef.current.onmessage = (event: any) => {
+      console.log(event.data);
+      setTimerSeconds(event.data);
+      if (event.data === 0) {
+        resetTimer();
+      }
+    };
+    workerRef.current.postMessage(timerSeconds);
   };
 
   const pauseTimer = () => {
     setTimerState("paused");
-    clearInterval(intervalIdRef.current); //clear timer
+    workerRef.current.terminate();
   };
 
   const resetTimer = () => {
     setTimerState("stopped");
-    clearInterval(intervalIdRef.current); //clear timer
+    workerRef.current.terminate();
+    //reset the timer with timerMode
     switch (timerMode) {
       case "pomodoro":
         setTimerSeconds(25 * 60);
