@@ -13,6 +13,7 @@ const AccountMenu = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const hasDropdownBeenHovered = useRef(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const userInfoRef = useRef<HTMLDivElement>(null);
 
   const handleDropdownClick = () => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -26,7 +27,9 @@ const AccountMenu = () => {
       if (
         dropdownRef.current &&
         !dropdownRef.current.contains(event.target as Node) &&
-        event.target !== document.activeElement
+        event.target !== document.activeElement &&
+        (!userInfoRef.current ||
+          !userInfoRef.current.contains(event.target as Node))
       ) {
         setIsDropdownOpen(false);
       }
@@ -45,6 +48,7 @@ const AccountMenu = () => {
         <div
           className="bg-primary bg-opacity-75 backdrop-blur-xl px-5 h-8 rounded-md flex items-center cursor-pointer select-none"
           onClick={handleDropdownClick}
+          ref={userInfoRef}
         >
           <p className="text-ellipsis w-20 overflow-hidden whitespace-nowrap">
             <i className="fi fi-ss-user"></i> {loginSelector.name}
