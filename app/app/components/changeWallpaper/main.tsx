@@ -44,6 +44,14 @@ const ChangeWallpaper = () => {
     }
   };
 
+  const checkLogin = () => {
+    const accountData = localStorage.getItem("accountData");
+    if (accountData) {
+      return false;
+    }
+    return true;
+  };
+
   return (
     <motion.div
       initial={{ scale: 0.7 }}
@@ -56,6 +64,17 @@ const ChangeWallpaper = () => {
       }}
       className="bg-primary bg-opacity-95 backdrop-blur-lg border border-primaryLight rounded-md text-sm w-[850px] h-[500px]"
     >
+      {/* !check login frist for this feature */}
+      {checkLogin() && (
+        <div className="opacity-0 hover:opacity-100 duration-300 z-20 absolute w-full h-full bg-black bg-opacity-25 backdrop-blur-sm rounded-md handle flex">
+          <div className="m-auto">
+            {/* need login first */}
+            <p className="text-white text-center">
+              Please login to use this feature
+            </p>
+          </div>
+        </div>
+      )}
       <div className="flex justify-between">
         <div className="px-5 pt-4 pb-2 items-center flex space-x-2">
           <i
