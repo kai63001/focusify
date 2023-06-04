@@ -1,4 +1,5 @@
 import dynamic from "next/dynamic";
+import WallpaperMain from "./components/wallpaper/main";
 const MainList = dynamic(() => import("./components/menu/mainList"), {
   ssr: false,
 });
@@ -23,16 +24,7 @@ const AppFocusPage = () => {
       {/* dragable */}
       <ControlComponents />
 
-      <div>
-        <video
-          className="w-full h-full object-cover absolute top-0 left-0 z-0"
-          autoPlay
-          loop
-          muted
-        >
-          <source src="/bg2.mp4" type="video/mp4" />
-        </video>
-      </div>
+      <WallpaperMain />
     </div>
   );
 };

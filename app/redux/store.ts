@@ -6,6 +6,7 @@ import taskReducer from "./slice/task.slice";
 import appControlReducer from "./slice/appControl.slice";
 import noteReducer from "./slice/note.slice";
 import musicReducer from "./slice/music.slice";
+import wallpaperReducer from "./slice/wallpaper.slice";
 
 export const store = configureStore({
   reducer: {
@@ -15,6 +16,7 @@ export const store = configureStore({
     appControl: appControlReducer,
     note: noteReducer,
     music: musicReducer,
+    wallpaper: wallpaperReducer,
   },
 });
 

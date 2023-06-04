@@ -13,7 +13,7 @@ const initialState: MusicState = {
   listMusic: [],
 };
 
-export const noteSlice = createSlice({
+export const musicSlice = createSlice({
   name: "music",
   initialState,
   reducers: {
@@ -29,6 +29,6 @@ export const noteSlice = createSlice({
   },
 });
 
-export const { setMusicPlaying, setListMusic,setSelectMusic } = noteSlice.actions;
+export const { setMusicPlaying, setListMusic,setSelectMusic } = musicSlice.actions;
 
-export default noteSlice.reducer;
+export default musicSlice.reducer;

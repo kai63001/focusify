@@ -8,4 +8,5 @@ export enum CollectionId {
   note = "6473411a51c918853ddb", //focusifyApp
   musicList = "647adddfa95ce503f571", //appController
   wallpaper = "647c64ea1f7f860296b2", //appController
+  appWallpaper = "647c7fd48581d6dab418", //focusifyApp
 }
