@@ -160,23 +160,25 @@ const NoteDetail = () => {
             ></i>
           </div>
         </div>
-        <div className="px-5 pt-2 pb-5">
+        <div className="px-5 pt-2 pb-5 bg-primaryLight">
           <input
             onChange={(e) => setTitleInput(e.target.value)}
             value={titleInput}
             type="text"
             placeholder="Note title..."
-            className="bg-primaryLight rounded-md px-3 py-2 outline-none mb-2 w-2/3"
+            className="bg-primaryLight rounded-md px-2 text-2xl py-2 outline-none w-2/3"
           />
           <Editor
             onInit={(evt, editor) => (editorRef.current = editor)}
             initialValue={detail}
             apiKey="3sebmkk1m4t8x0vcudqws9lwdz2pqzs60giqdco3yfhleubs"
             init={{
+              branding: false,
               skin: "oxide-dark",
               content_css: ["/content.css"],
               height: 450,
               menubar: false,
+              resize: false,
               toolbar:
                 "undo redo | formatselect | " +
                 "bold italic backcolor | alignleft aligncenter " +

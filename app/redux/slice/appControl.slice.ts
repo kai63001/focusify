@@ -43,6 +43,14 @@ export interface AppControlState {
     };
     index: number;
   };
+  appChangeWallpaper: {
+    isShow: boolean;
+    position: {
+      x: number;
+      y: number;
+    };
+    index: number;
+  };
 }
 
 const initialState: AppControlState = {
@@ -79,6 +87,14 @@ const initialState: AppControlState = {
     index: 20,
   },
   appMusicInfo: {
+    isShow: false,
+    position: {
+      x: 0,
+      y: 0,
+    },
+    index: 20,
+  },
+  appChangeWallpaper: {
     isShow: false,
     position: {
       x: 0,

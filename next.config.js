@@ -2,7 +2,7 @@
 const nextConfig = {
     //image
     images: {
-        domains: ['images.unsplash.com', 'picsum.photos','i.ytimg.com'],
+        domains: ['images.unsplash.com', 'picsum.photos','i.ytimg.com','cloud.appwrite.io'],
     },
 }
 

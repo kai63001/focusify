@@ -7,4 +7,5 @@ export enum CollectionId {
   task = "6471a6c388eba85f3359", //focusifyApp
   note = "6473411a51c918853ddb", //focusifyApp
   musicList = "647adddfa95ce503f571", //appController
+  wallpaper = "647c64ea1f7f860296b2", //appController
 }

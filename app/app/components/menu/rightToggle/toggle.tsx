@@ -1,13 +1,23 @@
+import { useAppDispatch, useAppSelector } from "@/app/redux/hook";
+import { setOpenApp } from "@/app/redux/slice/appControl.slice";
 import { useState, useRef, useEffect } from "react";
 
 const RightToggleMenu = () => {
+  const dispatch = useAppDispatch();
+  const { appChangeWallpaper } = useAppSelector((state) => state.appControl);
   const dropdownItems = [
     {
       id: 1,
       label: "Change Wallpaper",
       icon: <i className="fi fi-sr-desktop-wallpaper mt-1 mr-3"></i>,
+      onClick: () => openApp("appChangeWallpaper"),
     },
   ];
+
+  const openApp = (app: string) => {
+    dispatch(setOpenApp({ isShow: !appChangeWallpaper.isShow, app }));
+    setIsDropdownOpen(false);
+  };
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const hasDropdownBeenHovered = useRef(false);
@@ -61,6 +71,7 @@ const RightToggleMenu = () => {
             {dropdownItems.map((item) => (
               <div
                 key={item.id}
+                onClick={item.onClick}
                 className="px-3 py-1 hover:bg-primaryLight cursor-pointer flex items-center"
               >
                 {item.icon && item.icon}

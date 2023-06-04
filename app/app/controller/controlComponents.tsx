@@ -21,11 +21,22 @@ const YoutubeMain = dynamic(() => import("../components/youtube/main"), {
 const MusicInfoMain = dynamic(() => import("../components/musicInfo/main"), {
   ssr: false,
 });
+const ChangeWallpaperMain = dynamic(
+  () => import("../components/changeWallpaper/main"),
+  {
+    ssr: false,
+  }
+);
 
 const ControlComponents = () => {
-  const { appTodoList, appNote, appPomodoro, appYoutube,appMusicInfo } = useAppSelector(
-    (state) => state.appControl
-  );
+  const {
+    appTodoList,
+    appNote,
+    appPomodoro,
+    appYoutube,
+    appMusicInfo,
+    appChangeWallpaper,
+  } = useAppSelector((state) => state.appControl);
   const dispath = useAppDispatch();
   const onDragEnd = (e: any, app: any) => {
     e.preventDefault();
@@ -99,7 +110,7 @@ const ControlComponents = () => {
           <YoutubeMain />
         </Dragable>
       )}
-     {appMusicInfo.isShow && (
+      {appMusicInfo.isShow && (
         <Dragable
           id="appMusicInfo"
           x={appMusicInfo.position.x}
@@ -110,7 +121,19 @@ const ControlComponents = () => {
         >
           <MusicInfoMain />
         </Dragable>
-      )} 
+      )}
+      {appChangeWallpaper.isShow && (
+        <Dragable
+          id="appChangeWallpaper"
+          x={appChangeWallpaper.position.x}
+          y={appChangeWallpaper.position.y}
+          index={appChangeWallpaper.index}
+          onDragEnd={(e: any) => onDragEnd(e, "appChangeWallpaper")}
+          onDragStart={(e: any) => onDragStart(e, "appChangeWallpaper")}
+        >
+          <ChangeWallpaperMain />
+        </Dragable>
+      )}
     </div>
   );
 };
