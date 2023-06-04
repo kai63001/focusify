@@ -9,9 +9,11 @@ import {
   setMyWallpaper,
   setWallpaper,
 } from "@/app/redux/slice/wallpaper.slice";
-import { ID } from "appwrite";
+import { ID, Query } from "appwrite";
+import { useAlert } from "@/app/hook/AlertContext";
 
-const ListWallpaper = () => {
+const ListWallpaper = ({ type = "wallpaper" }: { type?: string }) => {
+  const { toastAlert, closeAlert }: any = useAlert();
   const dispatch = useAppDispatch();
   const { databases } = useAppwrite();
   const [listWallpaper, setListWallpaper] = useState<any[]>([]);
@@ -58,6 +60,11 @@ const ListWallpaper = () => {
             type: response.type,
           })
         );
+        setSelectedWallpaper(null);
+        toastAlert("Update wallpaper success");
+        setTimeout(() => {
+          closeAlert();
+        }, 1000);
       })
       .catch(function (error: any) {
         console.log(error);
@@ -82,6 +89,11 @@ const ListWallpaper = () => {
     result
       .then(function (response: any) {
         console.log(response);
+        setSelectedWallpaper(null);
+        toastAlert("Update wallpaper success");
+        setTimeout(() => {
+          closeAlert();
+        }, 1000);
       })
       .catch(function (error: any) {
         console.log(error);
@@ -93,7 +105,8 @@ const ListWallpaper = () => {
     if (!databases) return;
     const result: any = databases?.listDocuments(
       DatabaseId.appController,
-      CollectionId.wallpaper
+      CollectionId.wallpaper,
+      [Query.equal("type", type)]
     );
     result
       .then(function (response: any) {
@@ -102,7 +115,7 @@ const ListWallpaper = () => {
       .catch(function (error: any) {
         console.log(error);
       });
-  }, [databases]);
+  }, [databases, type]);
 
   return (
     <div className="list-wallpaper relative h-full">
@@ -129,7 +142,7 @@ const ListWallpaper = () => {
             <Image
               className="rounded-md"
               sizes="50vw, 33vw"
-              src={wallpaper.url}
+              src={wallpaper.cover}
               alt={`wallpaper ${wallpaper.name}`}
               fill
               style={{ objectFit: "cover" }}

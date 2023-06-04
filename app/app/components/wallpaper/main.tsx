@@ -49,7 +49,7 @@ const WallpaperMain = () => {
       });
   }, [databases, dispatch]);
 
-  if (wallpaperUrl && type === "wallpaper") {
+  if (wallpaperUrl && type == "wallpaper") {
     return (
       <div className="w-full h-full absolute top-0 left-0 z-0">
         <Image
@@ -62,15 +62,31 @@ const WallpaperMain = () => {
       </div>
     );
   }
+  if (wallpaperUrl && type == "live") {
+    return (
+      <div>
+        <video
+          key={wallpaperUrl}
+          className="w-full h-full object-cover absolute top-0 left-0 z-0"
+          autoPlay
+          loop
+          muted
+        >
+          <source src={wallpaperUrl} type="video/mp4" />
+        </video>
+      </div>
+    );
+  }
   return (
     <div>
       <video
+        key="main"
         className="w-full h-full object-cover absolute top-0 left-0 z-0"
         autoPlay
         loop
         muted
       >
-        <source src="/bg2.mp4" type="video/mp4" />
+        <source src={"/bg2.mp4"} type="video/mp4" />
       </video>
     </div>
   );

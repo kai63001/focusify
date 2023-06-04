@@ -21,7 +21,6 @@ const PomodoroMain = () => {
     workerRef.current = new Worker("/timerWorker.js");
 
     workerRef.current.onmessage = (event: any) => {
-      console.log(event.data);
       setTimerSeconds(event.data);
       if (event.data === 0) {
         resetTimer();
@@ -100,7 +99,7 @@ const PomodoroMain = () => {
           <button
             onClick={() => {
               setTimerState("stopped");
-              clearInterval(intervalIdRef.current);
+              workerRef.current.terminate();
               setTimerMode("pomodoro");
               setTimerSeconds(25 * 60);
             }}
@@ -113,7 +112,7 @@ const PomodoroMain = () => {
           <button
             onClick={() => {
               setTimerState("stopped");
-              clearInterval(intervalIdRef.current);
+              workerRef.current.terminate();
               setTimerMode("shortBreak");
               setTimerSeconds(5 * 60);
             }}
@@ -126,7 +125,7 @@ const PomodoroMain = () => {
           <button
             onClick={() => {
               setTimerState("stopped");
-              clearInterval(intervalIdRef.current);
+              workerRef.current.terminate();
               setTimerMode("longBreak");
               setTimerSeconds(15 * 60);
             }}

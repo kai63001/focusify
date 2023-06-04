@@ -37,6 +37,8 @@ const ChangeWallpaper = () => {
     switch (selectTab) {
       case WallpaperType.wallpaper:
         return <ListWallpaper />;
+      case WallpaperType.liveWallpaper:
+        return <ListWallpaper type="live" />;
       default:
         return <ListWallpaper />;
     }
@@ -84,9 +86,7 @@ const ChangeWallpaper = () => {
             })}
           </div>
         </div>
-        <div className="w-9/12">
-            {renderTab()}
-        </div>
+        <div className="w-9/12">{renderTab()}</div>
       </div>
     </motion.div>
   );
