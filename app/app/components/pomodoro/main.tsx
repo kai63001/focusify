@@ -5,7 +5,6 @@ import { motion } from "framer-motion";
 
 const PomodoroMain = () => {
   const dispatch = useAppDispatch();
-  const intervalIdRef: any = useRef(null); // Add this line
   const closePomodoroApp = () => {
     dispatch(setOpenApp({ app: "appPomodoro", isShow: false }));
   };
@@ -13,6 +12,7 @@ const PomodoroMain = () => {
   const [timerState, setTimerState] = useState("stopped"); // "stopped", "running", or "paused"
   const [timerSeconds, setTimerSeconds] = useState(25 * 60); // default to 25 minutes in seconds
   const [timerMode, setTimerMode] = useState("pomodoro"); // "pomodoro", "shortBreak", or "longBreak"
+  const [pomodoroCount, setPomodoroCount] = useState(0); // How many pomodoros completed
 
   const workerRef: any = useRef(null);
 
@@ -34,22 +34,52 @@ const PomodoroMain = () => {
     workerRef.current.terminate();
   };
 
-  const resetTimer = () => {
+  const resetTimer = (autoChange = true) => {
     setTimerState("stopped");
     workerRef.current.terminate();
     //reset the timer with timerMode
-    switch (timerMode) {
-      case "pomodoro":
+    // Increment the pomodoro counter and determine the new timer mode
+    if (autoChange) {
+      if (timerMode === "pomodoro") {
+        const newPomodoroCount = pomodoroCount + 1;
+        const newTimerMode: any =
+          newPomodoroCount % 4 === 0 ? "longBreak" : "shortBreak";
+
+        // Update the state with the new timer mode and seconds
+        setPomodoroCount(newPomodoroCount);
+        setTimerMode(newTimerMode);
+        switch (newTimerMode) {
+          case "pomodoro":
+            setTimerSeconds(25 * 60);
+            break;
+          case "shortBreak":
+            setTimerSeconds(5 * 60);
+            break;
+          case "longBreak":
+            setTimerSeconds(15 * 60);
+            setPomodoroCount(0);
+            break;
+          default:
+            setTimerSeconds(25 * 60);
+        }
+      } else {
         setTimerSeconds(25 * 60);
-        break;
-      case "shortBreak":
-        setTimerSeconds(5 * 60);
-        break;
-      case "longBreak":
-        setTimerSeconds(15 * 60);
-        break;
-      default:
-        setTimerSeconds(25 * 60);
+        setTimerMode("pomodoro");
+      }
+    } else {
+      switch (timerMode) {
+        case "pomodoro":
+          setTimerSeconds(25 * 60);
+          break;
+        case "shortBreak":
+          setTimerSeconds(5 * 60);
+          break;
+        case "longBreak":
+          setTimerSeconds(15 * 60);
+          break;
+        default:
+          setTimerSeconds(25 * 60);
+      }
     }
   };
 
@@ -159,7 +189,7 @@ const PomodoroMain = () => {
               Pause
             </button>
           )}
-          <button onClick={resetTimer}>
+          <button onClick={(e) => resetTimer(false)}>
             <i className="fi fi-br-refresh"></i>
           </button>
         </div>
