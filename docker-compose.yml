@@ -10,9 +10,9 @@ services:
     restart: always
     # env for github action
     volumes:
-      - .:/app
-      - /app/node_modules
-      - /app/.next
+      - .:/webApp
+      - /webApp/node_modules
+      - /webApp/.next
     environment:
       - NODE_ENV=production
       - NEXT_PUBLIC_ENDPOINT

@@ -1,6 +1,6 @@
 FROM node:18
 
-WORKDIR /app
+WORKDIR /webApp
 
 COPY package.json pnpm-lock.yaml* ./
 
