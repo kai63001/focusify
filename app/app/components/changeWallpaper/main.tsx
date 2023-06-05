@@ -36,9 +36,9 @@ const ChangeWallpaper = () => {
   const renderTab = () => {
     switch (selectTab) {
       case WallpaperType.wallpaper:
-        return <ListWallpaper />;
+        return <ListWallpaper key="wallpaper" />;
       case WallpaperType.liveWallpaper:
-        return <ListWallpaper type="live" />;
+        return <ListWallpaper key="live" type="live" />;
       default:
         return <ListWallpaper />;
     }
