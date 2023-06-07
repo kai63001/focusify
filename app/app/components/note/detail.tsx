@@ -7,6 +7,8 @@ import { ID } from "appwrite";
 import { Editor } from "@tinymce/tinymce-react";
 import { useEffect, useRef, useState } from "react";
 import { useAlert } from "@/app/hook/AlertContext";
+import { toast } from "react-toastify";
+
 const NoteDetail = () => {
   const { openAlert, toastAlert, closeAlert }: any = useAlert();
   const selectedNote = useAppSelector((state) => state.note.selectedNote);

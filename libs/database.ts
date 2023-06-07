@@ -10,3 +10,7 @@ export enum CollectionId {
   wallpaper = "647c64ea1f7f860296b2", //appController
   appWallpaper = "647c7fd48581d6dab418", //focusifyApp
 }
+
+export enum BucketId {
+  background = "646d90c248ed51161bac",
+}

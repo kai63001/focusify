@@ -32,7 +32,7 @@ export const wallpaperSlice = createSlice({
     setMyWallpaper: (state, action: PayloadAction<any>) => {
       state.myWallpaper.url = action.payload.url;
       state.myWallpaper.type = action.payload.type;
-        state.myWallpaper.id = action.payload.id;
+      state.myWallpaper.id = action.payload.id;
     },
   },
 });
