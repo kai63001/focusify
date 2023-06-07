@@ -27,7 +27,7 @@ const WallpaperMain = () => {
     );
     result
       .then(function (response: any) {
-        console.log("wallpaper", response);
+        // console.log("wallpaper", response);
         if (response.documents.length > 0) {
           dispatch(
             setMyWallpaper({

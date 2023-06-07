@@ -35,7 +35,7 @@ const MainMusicBox = () => {
         DatabaseId.appController,
         CollectionId.musicList
       );
-      console.log(res);
+      // console.log(res);
       dispath(setListMusic(res.documents));
     };
     getAllMusic();
