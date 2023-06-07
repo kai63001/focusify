@@ -70,3 +70,39 @@ iframe {
   background-color: #434343 !important;
   border: none !important;
 }
+
+.circleBackdrop {
+  position: absolute;
+  width: 689px;
+  height: 689px;
+  left: calc(50% - 689px / 2 - 0.5px);
+  border-radius: 500px;
+
+  background: linear-gradient(
+    180deg,
+    #dd524c 0%,
+    #d7443d 25%,
+    #d1332e 50%,
+    #cb2320 75%,
+    #bb322c 100%
+  );
+
+  filter: blur(250px);
+}
+
+.circleBackdrop-sm {
+  position: absolute;
+  width: 275px;
+  height: 275px;
+  left: 278px;
+
+  background: linear-gradient(
+    180deg,
+    #dd524c 0%,
+    #d7443d 25%,
+    #d1332e 50%,
+    #cb2320 75%,
+    #bb322c 100%
+  );
+  filter: blur(150px);
+}

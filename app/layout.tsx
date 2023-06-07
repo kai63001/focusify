@@ -1,10 +1,10 @@
 import "./globals.scss";
-import { Inter } from "next/font/google";
+import { Quicksand } from "next/font/google";
 import { Providers } from "./redux/provider";
 import { AlertProvider } from "./hook/AlertContext";
 import MotionAlert from "./hook/MotionAlert";
 import ToastAlert from "./hook/ToastAlert";
-const inter = Inter({ subsets: ["latin"] });
+const quicksand = Quicksand({ subsets: ["latin"] });
 
 export const metadata = {
   title: "Focusify",
@@ -18,7 +18,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body suppressHydrationWarning={true} className={inter.className}>
+      <body suppressHydrationWarning={true} className={quicksand.className}>
         <AlertProvider>
           <Providers>{children}</Providers>
           <MotionAlert />
