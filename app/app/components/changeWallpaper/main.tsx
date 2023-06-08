@@ -89,7 +89,7 @@ const ChangeWallpaper = () => {
         <div className="px-5 pt-4 pb-2 items-center flex space-x-2">
           <i
             onClick={closeApp}
-            className="fi fi-rr-horizontal-rule cursor-pointer"
+            className="fi fi-rr-horizontal-rule cursor-pointer z-30"
           ></i>
         </div>
         <div className="w-full cursor-grab handle"></div>

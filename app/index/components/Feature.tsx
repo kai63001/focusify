@@ -7,12 +7,12 @@ const IndexFeature = () => {
       <p className="text-center text-4xl mt-5 whitespace-pre-line">
         {`Focusify is your one-stop \n solution to boost productivity`}
       </p>
-      <div className="flex justify-between mt-10">
+      <div className="flex justify-between items-center mt-10">
         <div className="relative h-[400px] w-7/12">
           <div className="circleBackdrop-sm top-6"></div>
           <Image
             src="/main/pomodoro.png"
-            alt="main"
+            alt="pomodoro"
             fill
             quality={100}
             className="rounded-3xl object-scale-down z-40"
@@ -27,6 +27,85 @@ const IndexFeature = () => {
             Pomodoro Timer.`}
           </p>
         </div>
+      </div>
+      <div className="flex justify-between items-center mt-14">
+        <div className="text-left w-7/12">
+          <h3 className="text-5xl font-bold whitespace-pre-line">{`Noise cancellation \nwith Soothing Sounds. `}</h3>
+          <p className="whitespace-pre-line text-3xl -mt-3 font-light">
+            {`
+            Focusify Cut Out the Noise with
+            Soothing Sounds. Adjustable 
+            Soundscapes for Each Scene - 
+            Rain , Campfire , Forest , and More.`}
+          </p>
+        </div>
+        <div className="relative h-[400px] w-5/12">
+          <div className="circleBackdrop-sm top-6"></div>
+          <Image
+            src="/main/Sound.png"
+            alt="Sound"
+            fill
+            quality={100}
+            className="rounded-3xl object-scale-down z-40"
+          />
+        </div>
+      </div>
+      <div className="flex justify-between items-center mt-14">
+        <div className="relative h-[400px] w-7/12">
+          <div className="circleBackdrop-sm top-6"></div>
+          <Image
+            src="/main/Music.png"
+            alt="Music"
+            fill
+            quality={100}
+            className="rounded-3xl object-scale-down z-40"
+          />
+        </div>
+        <div className="text-left w-5/12">
+          <h3 className="text-5xl font-bold whitespace-pre-line">{`The Perfect Playlist.`}</h3>
+          <p className="whitespace-pre-line text-3xl -mt-3 font-light">
+            {`
+            The perfect playlist. Play.
+            Music is ad-free and still has How to play YouTube videos 
+            via URL link.`}
+          </p>
+        </div>
+      </div>
+      <div className="flex justify-between items-center mt-14">
+        <div className="text-left w-7/12">
+          <h3 className="text-5xl font-bold whitespace-pre-line">{`Take note of the story\n& To do list.`}</h3>
+          <p className="whitespace-pre-line text-3xl -mt-3 font-light">
+            {`
+            Capture your thoughts and ideas \nbefore they're lost by taking notes. \nAnd you can also define a to-do list..`}
+          </p>
+        </div>
+        <div className="relative h-[400px] w-5/12">
+          <div className="circleBackdrop-sm top-6"></div>
+          <Image
+            src="/main/noteTodo.png"
+            alt="noteTodo"
+            fill
+            quality={100}
+            className="rounded-3xl object-scale-down z-40"
+          />
+        </div>
+      </div>
+      {/* center */}
+      <div className="flex flex-col justify-center items-center mt-14 ">
+        <div className="relative h-[400px] w-5/12">
+          <div className="circleBackdrop-sm top-6"></div>
+          <Image
+            src="/main/wallpaper.png"
+            alt="wallpaper note book"
+            fill
+            quality={100}
+            className="rounded-3xl object-scale-down z-40"
+          />
+        </div>
+        <h3 className="text-5xl font-bold whitespace-pre-line text-center">{` Choose to use a wallpaper catalog \nand can import wallpapers.`}</h3>
+        <p className="whitespace-pre-line text-3xl mt-5 font-light text-center">
+          {`Choose from a full catalog of original scenes, interactive \nscenes, and more, and even import photos from \nyour PC. You can set it as wallpaper too.`}
+        </p>
       </div>
     </div>
   );

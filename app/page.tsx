@@ -6,7 +6,7 @@ import IndexFeature from "./index/components/Feature";
 
 export default function Home() {
   return (
-    <main className="bg-[#121316] h-[3000px]">
+    <main className="bg-[#121316]">
       <IndexNavbar />
       <IndexHeader />
       {/* banner show tools */}
