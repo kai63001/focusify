@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 const IndexFooter = () => {
   return (
-    <footer className="max-w-[1600px]  py-4 w-full m-auto flex flex-col">
+    <footer className="max-w-[1400px]  py-4 w-full m-auto flex flex-col">
       <div className="border-b-2 border-[#FFFFFF] border-opacity-10"></div>
       <div className="flex justify-between mt-5">
         <div>

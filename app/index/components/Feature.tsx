@@ -2,13 +2,13 @@ import Image from "next/image";
 
 const IndexFeature = () => {
   return (
-    <div className="max-w-[1600px] py-4 w-full m-auto flex flex-col justify-center relative">
+    <div className="max-w-[1400px] py-4 w-full m-auto flex flex-col justify-center relative">
       <div className="absolute h-full w-full hidden md:block">
         <Image
           src="/main/Line1.webp"
           alt="line"
-          className="object-contain h-[2093px] mt-[400px]"
-          width={1600}
+          className="object-contain h-[1893px]  mt-[550px]"
+          width={2000}
           height={200}
           
         />

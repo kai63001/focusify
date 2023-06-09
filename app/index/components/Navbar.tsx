@@ -5,7 +5,7 @@ import Link from "next/link";
 const IndexNavbar = () => {
   return (
     <>
-      <nav className="flex justify-between items-center max-w-[1600px] py-4 w-full m-auto">
+      <nav className="flex justify-between items-center max-w-[1400px] py-4 w-full m-auto">
         {/* Logo */}
         <Image
           src="/logo.png"
