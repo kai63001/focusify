@@ -2,7 +2,17 @@ import Image from "next/image";
 
 const IndexFeature = () => {
   return (
-    <div className="max-w-[1600px] py-4 w-full m-auto flex flex-col justify-center">
+    <div className="max-w-[1600px] py-4 w-full m-auto flex flex-col justify-center relative">
+      <div className="absolute h-full w-full hidden md:block">
+        <Image
+          src="/main/Line.png"
+          alt="line"
+          className="object-contain h-[2093px] mt-[400px]"
+          width={1600}
+          height={200}
+          
+        />
+      </div>
       <h2 className="text-6xl text-center mt-24 font-bold">Features</h2>
       <p className="text-center text-4xl mt-5 whitespace-pre-line">
         {`Focusify is your one-stop \n solution to boost productivity`}
