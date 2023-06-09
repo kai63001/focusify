@@ -1,6 +1,6 @@
 const IndexSubscribe = () => {
   return (
-    <div className="max-w-[1600px] bg-[#1E2235] rounded-3xl py-10 w-full m-auto flex flex-col my-10">
+    <div className="max-w-[1400px] bg-[#1E2235] rounded-3xl py-10 w-full m-auto flex flex-col my-10">
       <div className="m-auto py-7 flex flex-col space-y-4 max-w-[550px]">
         <h2 className="text-3xl font-bold text-center">
           Subscribe to receive our new news.

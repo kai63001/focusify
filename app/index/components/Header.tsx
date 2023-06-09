@@ -2,7 +2,7 @@ import Link from "next/link";
 
 const IndexHeader = () => {
   return (
-    <div className="max-w-[1600px] py-4 w-full m-auto flex flex-col justify-center">
+    <div className="max-w-[1400px] py-4 w-full m-auto flex flex-col justify-center">
       <h1 className="text-6xl text-center mt-24 font-bold">Focusify</h1>
       <p className="text-center text-4xl mt-5 whitespace-pre-line">
         {`Your workspace to get things \n done smoothly.`}
