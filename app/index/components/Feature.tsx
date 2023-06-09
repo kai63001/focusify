@@ -11,9 +11,10 @@ const IndexFeature = () => {
         <div className="relative h-[400px] w-7/12">
           <div className="circleBackdrop-sm top-6"></div>
           <Image
-            src="/main/pomodoro.png"
+            src="/main/V5.png"
             alt="pomodoro"
             fill
+            unoptimized={true}
             quality={100}
             className="rounded-3xl object-scale-down z-40"
           />
@@ -42,9 +43,10 @@ const IndexFeature = () => {
         <div className="relative h-[400px] w-5/12">
           <div className="circleBackdrop-sm top-6"></div>
           <Image
-            src="/main/Sound.png"
+            src="/main/V4.png"
             alt="Sound"
             fill
+            unoptimized={true}
             quality={100}
             className="rounded-3xl object-scale-down z-40"
           />
@@ -54,9 +56,10 @@ const IndexFeature = () => {
         <div className="relative h-[400px] w-7/12">
           <div className="circleBackdrop-sm top-6"></div>
           <Image
-            src="/main/Music.png"
+            src="/main/V1.png"
             alt="Music"
             fill
+            unoptimized={true}
             quality={100}
             className="rounded-3xl object-scale-down z-40"
           />
@@ -82,9 +85,10 @@ const IndexFeature = () => {
         <div className="relative h-[400px] w-5/12">
           <div className="circleBackdrop-sm top-6"></div>
           <Image
-            src="/main/noteTodo.png"
+            src="/main/V3.png"
             alt="noteTodo"
             fill
+            unoptimized={true}
             quality={100}
             className="rounded-3xl object-scale-down z-40"
           />
@@ -95,9 +99,10 @@ const IndexFeature = () => {
         <div className="relative h-[400px] w-5/12">
           <div className="circleBackdrop-sm top-6"></div>
           <Image
-            src="/main/wallpaper.png"
+            src="/main/V2.png"
             alt="wallpaper note book"
             fill
+            unoptimized={true}
             quality={100}
             className="rounded-3xl object-scale-down z-40"
           />
