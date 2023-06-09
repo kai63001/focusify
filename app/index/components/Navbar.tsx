@@ -1,29 +1,8 @@
+import { navbarList } from "@/libs/dataList";
 import Image from "next/image";
 import Link from "next/link";
 
 const IndexNavbar = () => {
-  const navbarList = [
-    {
-      name: "Contact Us",
-      link: "/",
-    },
-    {
-      name: "Features",
-      link: "/",
-    },
-    {
-      name: "Community",
-      link: "/",
-    },
-    {
-      name: "FAQ",
-      link: "/",
-    },
-    {
-      name: "Subscription",
-      link: "/",
-    },
-  ];
   return (
     <>
       <nav className="flex justify-between items-center max-w-[1600px] py-4 w-full m-auto">
@@ -37,9 +16,6 @@ const IndexNavbar = () => {
         />
         {/* menu */}
         <ul className="flex items-center space-x-3">
-          {/* <li className="inline-block px-3 py-2 rounded-md cursor-pointer">
-            <link href="#">Contact Us</link>
-          </li> */}
           {navbarList.map((navbar) => (
             <li
               className="inline-block px-3 py-2 rounded-md cursor-pointer"

@@ -2,7 +2,17 @@ import Image from "next/image";
 
 const IndexFeature = () => {
   return (
-    <div className="max-w-[1600px] py-4 w-full m-auto flex flex-col justify-center">
+    <div className="max-w-[1600px] py-4 w-full m-auto flex flex-col justify-center relative">
+      <div className="absolute h-full w-full hidden md:block">
+        <Image
+          src="/main/Line1.webp"
+          alt="line"
+          className="object-contain h-[2093px] mt-[400px]"
+          width={1600}
+          height={200}
+          
+        />
+      </div>
       <h2 className="text-6xl text-center mt-24 font-bold">Features</h2>
       <p className="text-center text-4xl mt-5 whitespace-pre-line">
         {`Focusify is your one-stop \n solution to boost productivity`}
@@ -11,9 +21,10 @@ const IndexFeature = () => {
         <div className="relative h-[400px] w-7/12">
           <div className="circleBackdrop-sm top-6"></div>
           <Image
-            src="/main/pomodoro.png"
+            src="/main/V5.webp"
             alt="pomodoro"
             fill
+            unoptimized={true}
             quality={100}
             className="rounded-3xl object-scale-down z-40"
           />
@@ -42,9 +53,10 @@ const IndexFeature = () => {
         <div className="relative h-[400px] w-5/12">
           <div className="circleBackdrop-sm top-6"></div>
           <Image
-            src="/main/Sound.png"
+            src="/main/V4.webp"
             alt="Sound"
             fill
+            unoptimized={true}
             quality={100}
             className="rounded-3xl object-scale-down z-40"
           />
@@ -54,9 +66,10 @@ const IndexFeature = () => {
         <div className="relative h-[400px] w-7/12">
           <div className="circleBackdrop-sm top-6"></div>
           <Image
-            src="/main/Music.png"
+            src="/main/V1.webp"
             alt="Music"
             fill
+            unoptimized={true}
             quality={100}
             className="rounded-3xl object-scale-down z-40"
           />
@@ -82,9 +95,10 @@ const IndexFeature = () => {
         <div className="relative h-[400px] w-5/12">
           <div className="circleBackdrop-sm top-6"></div>
           <Image
-            src="/main/noteTodo.png"
+            src="/main/V3.webp"
             alt="noteTodo"
             fill
+            unoptimized={true}
             quality={100}
             className="rounded-3xl object-scale-down z-40"
           />
@@ -95,9 +109,10 @@ const IndexFeature = () => {
         <div className="relative h-[400px] w-5/12">
           <div className="circleBackdrop-sm top-6"></div>
           <Image
-            src="/main/wallpaper.png"
+            src="/main/V2.png"
             alt="wallpaper note book"
             fill
+            unoptimized={true}
             quality={100}
             className="rounded-3xl object-scale-down z-40"
           />
