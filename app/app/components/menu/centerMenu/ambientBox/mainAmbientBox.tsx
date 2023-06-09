@@ -105,7 +105,6 @@ const MainAmbientBox = () => {
         stiffness: 260,
         damping: 20,
       }}
-      style={{ zIndex: 1000 }}
     >
       <div className="relative">
         <div className="w-8 h-8 bg-primary bg-opacity-75 backdrop-blur-xl rounded-md flex justify-center items-center space-x-3">

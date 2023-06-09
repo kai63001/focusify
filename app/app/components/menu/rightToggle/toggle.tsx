@@ -1,5 +1,6 @@
 import { useAppDispatch, useAppSelector } from "@/app/redux/hook";
 import { setOpenApp } from "@/app/redux/slice/appControl.slice";
+import { motion } from "framer-motion";
 import { useState, useRef, useEffect } from "react";
 
 const RightToggleMenu = () => {
@@ -52,7 +53,17 @@ const RightToggleMenu = () => {
   }, []);
 
   return (
-    <div className="relative h-full">
+    <motion.div
+      initial={{ scale: 0.7 }}
+      animate={{ scale: 1 }}
+      exit={{ scale: 0.7 }}
+      transition={{
+        type: "spring",
+        stiffness: 260,
+        damping: 20,
+      }}
+      className="relative h-full"
+    >
       <div className="flex items-center">
         <div
           className="w-8 h-8 bg-primary bg-opacity-75 backdrop-blur-xl rounded-md flex justify-center items-center cursor-pointer"
@@ -81,7 +92,7 @@ const RightToggleMenu = () => {
           </div>
         )}
       </div>
-    </div>
+    </motion.div>
   );
   // return (
   //     <div className="w-8 h-8 bg-primary bg-opacity-75 backdrop-blur-xl rounded-md flex justify-center items-center cursor-pointer">

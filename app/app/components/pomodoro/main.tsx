@@ -31,12 +31,16 @@ const PomodoroMain = () => {
 
   const pauseTimer = () => {
     setTimerState("paused");
-    workerRef.current.terminate();
+    if (workerRef.current) {
+      workerRef.current.terminate();
+    }
   };
 
   const resetTimer = (autoChange = true) => {
     setTimerState("stopped");
-    workerRef.current.terminate();
+    if (workerRef.current) {
+      workerRef.current.terminate();
+    }
     //reset the timer with timerMode
     // Increment the pomodoro counter and determine the new timer mode
     if (autoChange) {
@@ -129,7 +133,9 @@ const PomodoroMain = () => {
           <button
             onClick={() => {
               setTimerState("stopped");
-              workerRef.current.terminate();
+              if (workerRef.current) {
+                workerRef.current.terminate();
+              }
               setTimerMode("pomodoro");
               setTimerSeconds(25 * 60);
             }}
@@ -142,7 +148,9 @@ const PomodoroMain = () => {
           <button
             onClick={() => {
               setTimerState("stopped");
-              workerRef.current.terminate();
+              if (workerRef.current) {
+                workerRef.current.terminate();
+              }
               setTimerMode("shortBreak");
               setTimerSeconds(5 * 60);
             }}
@@ -155,7 +163,9 @@ const PomodoroMain = () => {
           <button
             onClick={() => {
               setTimerState("stopped");
-              workerRef.current.terminate();
+              if (workerRef.current) {
+                workerRef.current.terminate();
+              }
               setTimerMode("longBreak");
               setTimerSeconds(15 * 60);
             }}

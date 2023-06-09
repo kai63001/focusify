@@ -2,7 +2,15 @@ import { useAppDispatch } from "@/app/redux/hook";
 import { setOpenApp } from "@/app/redux/slice/appControl.slice";
 import { motion } from "framer-motion";
 import { useState } from "react";
-import ListWallpaper from "./wallpaper/listWallpaper";
+// import ListWallpaper from "./wallpaper/listWallpaper";
+// import CustomWallpaper from "./wallpaper/customWallpaper";
+import dynamic from "next/dynamic";
+const ListWallpaper = dynamic(() => import("./wallpaper/listWallpaper"), {
+  ssr: false,
+});
+const CustomWallpaper = dynamic(() => import("./wallpaper/customWallpaper"), {
+  ssr: false,
+});
 
 enum WallpaperType {
   wallpaper = "wallpaper",
@@ -39,6 +47,8 @@ const ChangeWallpaper = () => {
         return <ListWallpaper key="wallpaper" />;
       case WallpaperType.liveWallpaper:
         return <ListWallpaper key="live" type="live" />;
+      case WallpaperType.custom:
+        return <CustomWallpaper />;
       default:
         return <ListWallpaper />;
     }
@@ -79,7 +89,7 @@ const ChangeWallpaper = () => {
         <div className="px-5 pt-4 pb-2 items-center flex space-x-2">
           <i
             onClick={closeApp}
-            className="fi fi-rr-horizontal-rule cursor-pointer"
+            className="fi fi-rr-horizontal-rule cursor-pointer z-30"
           ></i>
         </div>
         <div className="w-full cursor-grab handle"></div>

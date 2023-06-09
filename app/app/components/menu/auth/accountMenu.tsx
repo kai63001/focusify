@@ -1,12 +1,13 @@
 import { useAppSelector } from "@/app/redux/hook";
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
+import { motion } from "framer-motion";
 
 const AccountMenu = () => {
   const loginSelector = useAppSelector((state: { login: any }) => state.login);
   const dropdownItems = [
-    { id: 1, label: "Profile", path: "/auth/profile" },
-    { id: 2, label: "Settings", path: "/auth/settings" },
+    // { id: 1, label: "Profile", path: "/auth/profile" },
+    // { id: 2, label: "Settings", path: "/auth/settings" },
     { id: 3, label: "Logout", path: "/auth/logout" },
   ];
 
@@ -43,7 +44,15 @@ const AccountMenu = () => {
   }, []);
 
   return (
-    <div className="relative h-full">
+    <motion.div
+    initial={{ scale: 0.7 }}
+    animate={{ scale: 1 }}
+    exit={{ scale: 0.7 }}
+    transition={{
+      type: "spring",
+      stiffness: 260,
+      damping: 20,
+    }} className="relative h-full">
       <div className="flex items-center">
         <div
           className="bg-primary bg-opacity-75 backdrop-blur-xl px-5 h-8 rounded-md flex items-center cursor-pointer select-none"
@@ -74,7 +83,7 @@ const AccountMenu = () => {
           </div>
         )}
       </div>
-    </div>
+    </motion.div>
   );
 };
 
