@@ -5,7 +5,7 @@ const IndexFeature = () => {
     <div className="max-w-[1600px] py-4 w-full m-auto flex flex-col justify-center relative">
       <div className="absolute h-full w-full hidden md:block">
         <Image
-          src="/main/Line.png"
+          src="/main/Line1.webp"
           alt="line"
           className="object-contain h-[2093px] mt-[400px]"
           width={1600}
@@ -21,7 +21,7 @@ const IndexFeature = () => {
         <div className="relative h-[400px] w-7/12">
           <div className="circleBackdrop-sm top-6"></div>
           <Image
-            src="/main/V5.png"
+            src="/main/V5.webp"
             alt="pomodoro"
             fill
             unoptimized={true}
@@ -53,7 +53,7 @@ const IndexFeature = () => {
         <div className="relative h-[400px] w-5/12">
           <div className="circleBackdrop-sm top-6"></div>
           <Image
-            src="/main/V4.png"
+            src="/main/V4.webp"
             alt="Sound"
             fill
             unoptimized={true}
@@ -66,7 +66,7 @@ const IndexFeature = () => {
         <div className="relative h-[400px] w-7/12">
           <div className="circleBackdrop-sm top-6"></div>
           <Image
-            src="/main/V1.png"
+            src="/main/V1.webp"
             alt="Music"
             fill
             unoptimized={true}
@@ -95,7 +95,7 @@ const IndexFeature = () => {
         <div className="relative h-[400px] w-5/12">
           <div className="circleBackdrop-sm top-6"></div>
           <Image
-            src="/main/V3.png"
+            src="/main/V3.webp"
             alt="noteTodo"
             fill
             unoptimized={true}

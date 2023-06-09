@@ -7,7 +7,7 @@ const IndexBanner = () => {
       <div className="flex justify-center mt-5">
         <div className="w-[1600px] h-[890px] relative z-40">
           <Image
-            src="/main/main.png"
+            src="/main/Home.webp"
             alt="main"
             fill
             quality={100}
