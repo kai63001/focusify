@@ -119,7 +119,7 @@ const ListWallpaper = ({ type = "wallpaper" }: { type?: string }) => {
 
   return (
     <div className="list-wallpaper relative h-full">
-      <div className="grid grid-cols-2 gap-4 overflow-scroll no-scrollbar h-[430px]">
+      <div className="grid grid-cols-2 gap-4 overflow-scroll no-scrollbar">
         {listWallpaper.map((wallpaper) => (
           <div
             className={`${
