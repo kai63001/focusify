@@ -109,7 +109,7 @@ const IndexFeature = () => {
         <div className="relative h-[400px] w-5/12">
           <div className="circleBackdrop-sm top-6"></div>
           <Image
-            src="/main/V2.png"
+            src="/main/V2.webp"
             alt="wallpaper note book"
             fill
             unoptimized={true}
