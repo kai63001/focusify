@@ -40,6 +40,7 @@ export const taskSlice = createSlice({
     },
     removeTaskById: (state, action: PayloadAction<number>) => {
       state.tasks = state.tasks.filter((task) => task.$id !== action.payload);
+      console.log(state.tasks);
     },
     setTasks: (state, action: PayloadAction<any>) => {
       state.tasks = action.payload;

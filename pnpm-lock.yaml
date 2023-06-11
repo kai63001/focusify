@@ -34,6 +34,9 @@ dependencies:
   autoprefixer:
     specifier: 10.4.14
     version: 10.4.14(postcss@8.4.23)
+  autosize:
+    specifier: ^6.0.1
+    version: 6.0.1
   dayjs:
     specifier: ^1.11.7
     version: 1.11.7
@@ -88,6 +91,11 @@ dependencies:
   typescript:
     specifier: 5.0.4
     version: 5.0.4
+
+devDependencies:
+  '@types/autosize':
+    specifier: ^4.0.1
+    version: 4.0.1
 
 packages:
 
@@ -421,6 +429,10 @@ packages:
       tinymce: 6.4.2
     dev: false
 
+  /@types/autosize@4.0.1:
+    resolution: {integrity: sha512-iPJT/FCaSO79G6j+9n6gmFc5nhxZ1gDrA2UAvb5FslJ6FJQZnDfbBU0qp5vpp0Cbjj7+gOyjuWZ7RrXvRuETaA==}
+    dev: true
+
   /@types/hoist-non-react-statics@3.3.1:
     resolution: {integrity: sha512-iMIqiko6ooLrTh1joXodJK5X9xeEALT1kM5G3ZLhD3hszxBdIEd5C75U834D9mLcINgD4OyZf5uQXjkuYydWvA==}
     dependencies:
@@ -688,6 +700,10 @@ packages:
       picocolors: 1.0.0
       postcss: 8.4.23
       postcss-value-parser: 4.2.0
+    dev: false
+
+  /autosize@6.0.1:
+    resolution: {integrity: sha512-f86EjiUKE6Xvczc4ioP1JBlWG7FKrE13qe/DxBCpe8GCipCq2nFw73aO8QEBKHfSbYGDN5eB9jXWKen7tspDqQ==}
     dev: false
 
   /available-typed-arrays@1.0.5:
