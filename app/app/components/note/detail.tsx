@@ -7,7 +7,7 @@ import { ID } from "appwrite";
 import { Editor } from "@tinymce/tinymce-react";
 import { useEffect, useRef, useState } from "react";
 import { useAlert } from "@/app/hook/AlertContext";
-import { toast } from "react-toastify";
+import autosize from "autosize";
 
 const NoteDetail = () => {
   const { openAlert, toastAlert, closeAlert }: any = useAlert();
@@ -16,6 +16,7 @@ const NoteDetail = () => {
   const editorRef: any = useRef(null);
   const [titleInput, setTitleInput] = useState("");
   const [detail, setDetail] = useState<any>("");
+  const [resizeHeight, setResizeHeight] = useState<any>(600);
   const dispath = useAppDispatch();
 
   const backToMain = () => {
@@ -131,6 +132,19 @@ const NoteDetail = () => {
     };
   };
 
+  const textareaRef = useRef(null);
+  useEffect(() => {
+    if (textareaRef.current) {
+      autosize(textareaRef.current);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (editorRef.current) {
+      autosize(editorRef.current);
+    }
+  }, []);
+
   return (
     <motion.div
       initial={{ scale: 0.7 }}
@@ -141,54 +155,55 @@ const NoteDetail = () => {
         stiffness: 260,
         damping: 20,
       }}
+      className="bg-primary bg-opacity-95 backdrop-blur-lg border border-primaryLight rounded-md text-sm"
     >
-      <div className="bg-primary bg-opacity-95 backdrop-blur-lg border border-primaryLight rounded-md text-sm w-[550px]">
-        <div className="flex justify-between">
-          <div className="px-5 pt-4 pb-2 items-center flex space-x-2">
-            <i
-              onClick={backToMain}
-              className="fi fi-sr-arrow-left cursor-pointer"
-            ></i>
-          </div>
-          <div className="w-full cursor-grab handle"></div>
-          <div className="px-5 pt-4 pb-2 items-center flex space-x-2">
-            <i
-              onClick={handleDeleteNote}
-              className="fi fi-sr-trash text-lg cursor-pointer border-r border-gray-500 pr-1"
-            ></i>
-            <i
-              onClick={handleSaveNote}
-              className="fi fi-sr-disk text-lg cursor-pointer"
-            ></i>
-          </div>
+      <div className="flex justify-between">
+        <div className="px-5 pt-4 pb-2 items-center flex space-x-2">
+          <i
+            onClick={backToMain}
+            className="fi fi-sr-arrow-left cursor-pointer"
+          ></i>
         </div>
-        <div className="px-5 pt-2 pb-5 bg-primaryLight">
-          <input
-            onChange={(e) => setTitleInput(e.target.value)}
-            value={titleInput}
-            type="text"
-            placeholder="Note title..."
-            className="bg-primaryLight rounded-md px-2 text-2xl py-2 outline-none w-2/3"
-          />
-          <Editor
-            onInit={(evt, editor) => (editorRef.current = editor)}
-            initialValue={detail}
-            apiKey="3sebmkk1m4t8x0vcudqws9lwdz2pqzs60giqdco3yfhleubs"
-            init={{
-              branding: false,
-              skin: "oxide-dark",
-              content_css: ["/content.css"],
-              height: 450,
-              menubar: false,
-              resize: false,
-              toolbar:
-                "undo redo | formatselect | " +
-                "bold italic backcolor | alignleft aligncenter " +
-                "alignright alignjustify | bullist numlist outdent indent | " +
-                "removeformat | help",
-            }}
-          />
+        <div className="w-full cursor-grab handle"></div>
+        <div className="px-5 pt-4 pb-2 items-center flex space-x-2">
+          <i
+            onClick={handleDeleteNote}
+            className="fi fi-sr-trash text-lg cursor-pointer border-r border-gray-500 pr-1"
+          ></i>
+          <i
+            onClick={handleSaveNote}
+            className="fi fi-sr-disk text-lg cursor-pointer"
+          ></i>
         </div>
+      </div>
+      <div className="px-5 pt-2 pb-5 bg-primaryLight">
+        <textarea
+          name=""
+          id=""
+          className="w-full bg-primaryLight rounded-md px-2 text-2xl py-2 outline-none resize-none"
+          rows={1}
+          onChange={(e) => setTitleInput(e.target.value)}
+          placeholder="Note title..."
+          value={titleInput}
+          ref={textareaRef}
+        ></textarea>
+        <Editor
+          ref={editorRef}
+          onInit={(evt, editor) => (editorRef.current = editor)}
+          initialValue={detail}
+          apiKey="3sebmkk1m4t8x0vcudqws9lwdz2pqzs60giqdco3yfhleubs"
+          init={{
+            branding: false,
+            skin: "oxide-dark",
+            content_css: ["/content.css"],
+            menubar: false,
+            toolbar:
+              "undo redo | formatselect | " +
+              "bold italic backcolor | alignleft aligncenter " +
+              "alignright alignjustify | bullist numlist outdent indent | " +
+              "removeformat | help",
+          }}
+        />
       </div>
     </motion.div>
   );

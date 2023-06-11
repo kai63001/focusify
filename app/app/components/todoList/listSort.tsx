@@ -42,7 +42,10 @@ const ToDoListSort = ({ onTask = 0 }: { onTask?: number }) => {
 
   //useEffect check allTask if change then update items
   useEffect(() => {
-    if (allTask.tasks.length === 0) return;
+    if (allTask.tasks.length === 0) {
+      setItems([]);
+      return;
+    };
     console.log("allTask", allTask);
     setItems(allTask.tasks);
   }, [allTask]);
