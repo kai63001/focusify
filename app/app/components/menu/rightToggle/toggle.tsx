@@ -13,7 +13,17 @@ const RightToggleMenu = () => {
       icon: <i className="fi fi-sr-desktop-wallpaper mt-1 mr-3"></i>,
       onClick: () => openApp("appChangeWallpaper"),
     },
+    {
+      id: 2,
+      label: "Share Feedback",
+      icon: <i className="fi fi-sr-smile mt-1 mr-3"></i>,
+      onClick: () => openNextLink("https://forms.gle/dgEZx5a7Fv1DJhkD8"),
+    },
   ];
+
+  const openNextLink = (link: string) => {
+    window.open(link, "_blank");
+  };
 
   const openApp = (app: string) => {
     dispatch(setOpenApp({ isShow: !appChangeWallpaper.isShow, app }));
