@@ -1,16 +1,20 @@
+"use client";
 import Image from "next/image";
 
 const IndexFeature = () => {
+  const disableDrag = (e: any) => {
+    e.preventDefault();
+  };
   return (
     <div className="max-w-[1400px] py-4 w-full m-auto flex flex-col justify-center relative">
       <div className="absolute h-full w-full hidden md:block">
         <Image
+          onDragStart={disableDrag}
           src="/main/Line1.webp"
           alt="line"
           className="object-contain h-[1893px]  mt-[550px]"
           width={2000}
           height={200}
-          
         />
       </div>
       <h2 className="text-6xl text-center mt-24 font-bold">Features</h2>
