@@ -23,6 +23,8 @@ const PomodoroMain = () => {
     workerRef.current.onmessage = (event: any) => {
       setTimerSeconds(event.data);
       if (event.data === 0) {
+        const audio = new Audio("/sound/endSound.mp3");
+        audio.play();
         resetTimer();
       }
     };
@@ -104,6 +106,13 @@ const PomodoroMain = () => {
         setTimerSeconds(25 * 60);
     }
   };
+
+  useEffect(() => {
+    if (timerSeconds === 3 || timerSeconds === 2 || timerSeconds === 1) {
+      const audio = new Audio("/sound/noti.mp3");
+      audio.play();
+    }
+  }, [timerSeconds]);
 
   return (
     <motion.div
