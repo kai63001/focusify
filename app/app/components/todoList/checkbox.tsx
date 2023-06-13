@@ -48,22 +48,32 @@ const ToDoCheckBox = ({ id, onTask = 0 }: any) => {
       dispatch(removeCheckedId(id));
     }
   };
-  if (checked) {
-    return (
-      <div
-        className="bg-blue-800 w-4 h-4 rounded-sm mr-2 mt-1 flex justify-center items-center cursor-pointer"
-        // onClick={() => handleChecked(false)}
-      >
-        <i className="fi fi-br-check text-[#eaeaea] text-xs pt-1"></i>
-      </div>
-    );
-  }
   return (
-    <div
-      onClick={() => handleChecked(true)}
-      className="bg-white w-4 h-4 rounded-sm mr-2 mt-1 cursor-pointer"
+    <input
+      type="checkbox"
+      onClick={(e)=>{
+        e.stopPropagation();
+        handleChecked(!checked)
+      }}
+      className="checkbox checkbox-error mr-2 checkbox-sm rounded-md"
     />
   );
+  // if (checked) {
+  //   return (
+  //     <div
+  //       className="bg-blue-800 w-4 h-4 rounded-sm mr-2 mt-1 flex justify-center items-center cursor-pointer"
+  //       // onClick={() => handleChecked(false)}
+  //     >
+  //       <i className="fi fi-br-check text-[#eaeaea] text-xs pt-1"></i>
+  //     </div>
+  //   );
+  // }
+  // return (
+  //   <div
+  //     onClick={() => handleChecked(true)}
+  //     className="bg-white w-4 h-4 rounded-sm mr-2 mt-1 cursor-pointer"
+  //   />
+  // );
 };
 
 export default ToDoCheckBox;
