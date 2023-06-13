@@ -59,7 +59,7 @@ const PomodoroMain = () => {
             setTimerSeconds(25 * 60);
             break;
           case "shortBreak":
-            setTimerSeconds(5);
+            setTimerSeconds(5 * 60);
             break;
           case "longBreak":
             setTimerSeconds(15 * 60);
@@ -78,7 +78,7 @@ const PomodoroMain = () => {
           setTimerSeconds(25 * 60);
           break;
         case "shortBreak":
-          setTimerSeconds(5);
+          setTimerSeconds(5 * 60);
           break;
         case "longBreak":
           setTimerSeconds(15 * 60);
@@ -97,7 +97,7 @@ const PomodoroMain = () => {
         setTimerSeconds(25 * 60);
         break;
       case "shortBreak":
-        setTimerSeconds(5);
+        setTimerSeconds(5 * 60);
         break;
       case "longBreak":
         setTimerSeconds(15 * 60);
@@ -161,7 +161,7 @@ const PomodoroMain = () => {
                 workerRef.current.terminate();
               }
               setTimerMode("shortBreak");
-              setTimerSeconds(5);
+              setTimerSeconds(5 * 60);
             }}
             className={`${
               timerMode === "shortBreak" ? "bg-primaryLight text-white" : ""

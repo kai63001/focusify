@@ -142,7 +142,7 @@ const MainAmbientBox = () => {
                     {selectedSounds.includes(sound) ? (
                       <input
                         type="range"
-                        className="w-full h-6"
+                        className="range range-error range-xs mt-3"
                         min="0"
                         max="1"
                         step="0.01"

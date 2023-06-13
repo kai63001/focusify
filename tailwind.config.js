@@ -24,5 +24,14 @@ module.exports = {
       }
     },
   },
-  plugins: [],
+  daisyui: {
+    themes: [
+      {
+        mytheme: {
+          "error": "#ef4444",
+        },
+      },
+    ],
+  },
+  plugins: [require("daisyui")],
 }
