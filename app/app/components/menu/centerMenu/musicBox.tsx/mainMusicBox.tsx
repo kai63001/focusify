@@ -43,6 +43,11 @@ const MainMusicBox = () => {
 
   //useEffect check select music
   useEffect(() => {
+    if(selectMusic == "pause" && musicPlaying == "pause"){
+      audioRef.current?.pause();
+      setIsPlaying(false);
+      return
+    }
     if (
       listMusic.length > 0 &&
       selectMusic &&
@@ -219,7 +224,7 @@ const MainMusicBox = () => {
           >
             <input
               type="range"
-              className="w-full mt-1.5 "
+              className="range range-error range-xs mt-2"
               min="0"
               max="1"
               step="0.01"

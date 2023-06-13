@@ -45,15 +45,15 @@ const MainMusicInfo = () => {
               musicPlaying == music.$id ? "bg-primaryLight text-white" : ""
             }}`}
           >
-            <div className="flex items-center space-x-2 w-full">
-              <div className="w-1/12">
+            <div className="grid grid-cols-12 gap-2 items-center space-x-2 w-full">
+              <div className="col-span-1">
                 {musicPlaying == music.$id ? (
                   <i className="fi fi-sr-pause text-xl"></i>
                 ) : (
                   <p className="text-2xl">{index + 1}</p>
                 )}
               </div>
-              <div className="flex flex-col w-10/12">
+              <div className="flex flex-col col-span-10">
                 <p
                   className={`font-bold text-lg ${
                     musicPlaying == music.$id
@@ -66,7 +66,7 @@ const MainMusicInfo = () => {
                 <span className="text-xs text-gray-400">{music.author}</span>
               </div>
               {/* calurate minute with second */}
-              <div className="w-1/12 text-right">
+              <div className="col-span-1 text-right">
                 <p className="text-md">
                   {Math.floor(music.duration / 60)}:
                   {music.duration % 60 < 10
