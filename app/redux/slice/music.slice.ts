@@ -24,6 +24,11 @@ export const musicSlice = createSlice({
       state.listMusic = action.payload;
     },
     setSelectMusic: (state, action: PayloadAction<any>) => {
+      if(action.payload === state.selectMusic){
+        state.selectMusic = "pause";
+        state.musicPlaying = "pause";
+        return
+      }
       state.selectMusic = action.payload;
     },
   },
