@@ -2,6 +2,7 @@ import Image from "next/image";
 import appwrite from "@/app/hook/appwrite";
 import { useState } from "react";
 import { ID } from "appwrite";
+import Link from "next/link";
 
 const LoginModal = () => {
   const { account, client } = appwrite();
@@ -252,6 +253,29 @@ const LoginModal = () => {
               </p>
             </div>
           </form>
+        </div>
+        <div className="flex w-full">
+          <div className="m-auto">
+            <p className="text-xs w-80">
+              By continuing, you are indicating that you accept our{" "}
+              <Link
+                href="/terms-of-service"
+                target="_blank"
+                className="text-red-500"
+              >
+                Terms of Service
+              </Link>{" "}
+              and{" "}
+              <Link
+                href="/privacy-policy"
+                target="_blank"
+                className="text-red-500"
+              >
+                Privacy Policy
+              </Link>
+              .
+            </p>
+          </div>
         </div>
       </div>
     </div>

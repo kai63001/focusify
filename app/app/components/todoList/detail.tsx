@@ -45,7 +45,6 @@ const ToDoDetail = () => {
     );
     result.then(
       function (response: any) {
-        console.log("response", response);
         setDetail(response);
         dispatch(setSelectedTaskData(response));
 
@@ -73,7 +72,6 @@ const ToDoDetail = () => {
         );
         result
           .then(function (response: any) {
-            console.log("response", response);
             //remove allTask by id
             const newTask = allTask.tasks.filter(
               (item: any) => item.$id !== selectedTask
@@ -100,7 +98,6 @@ const ToDoDetail = () => {
     );
     result
       .then(function (response: any) {
-        console.log("response", response);
         // update allTask by id
         const newTask = allTask.tasks.map((item: any) => {
           if (item.$id === selectedTask) {
@@ -139,7 +136,6 @@ const ToDoDetail = () => {
     );
     result
       .then(function (response: any) {
-        console.log("response", response);
         // update allTask by id
         const newTask = allTask.tasks.map((item: any) => {
           if (item.$id === selectedTask) {

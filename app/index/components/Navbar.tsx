@@ -7,13 +7,15 @@ const IndexNavbar = () => {
     <>
       <nav className="flex justify-between items-center max-w-[1400px] py-4 w-full m-auto">
         {/* Logo */}
-        <Image
-          src="/logo.png"
-          alt="logo"
-          width={50}
-          height={50}
-          className="cursor-pointer rounded-full"
-        />
+        <Link href="/">
+          <Image
+            src="/logo.png"
+            alt="logo"
+            width={50}
+            height={50}
+            className="cursor-pointer rounded-full"
+          />
+        </Link>
         {/* menu */}
         <ul className="flex items-center space-x-3">
           {navbarList.map((navbar) => (
