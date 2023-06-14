@@ -21,7 +21,7 @@ const IndexFooter = () => {
           ))}
         </ul>
         {/* Try In Browser */}
-        <Link href="/" className="rounded-full px-5 py-2 ">
+        <Link href="/privacy-policy" target="_blank" className="rounded-full px-5 py-2 ">
           Privacy Policy
         </Link>
       </div>

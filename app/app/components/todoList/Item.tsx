@@ -19,7 +19,6 @@ export function ToDoSortableItem(props: any) {
   };
 
   const selectTask = () => {
-    console.log("selectTask", props.data);
     dispatch(selectTaskList(props.data.$id));
   };
 

@@ -46,7 +46,6 @@ const ToDoListSort = ({ onTask = 0 }: { onTask?: number }) => {
       setItems([]);
       return;
     };
-    console.log("allTask", allTask);
     setItems(allTask.tasks);
   }, [allTask]);
 
