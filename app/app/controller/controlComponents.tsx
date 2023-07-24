@@ -2,29 +2,37 @@
 import dynamic from "next/dynamic";
 import { useAppDispatch, useAppSelector } from "@/app/redux/hook";
 import { setIndex, setPosition } from "@/app/redux/slice/appControl.slice";
+import LoadingWidget from "./LoadingWidget";
 
 const Dragable = dynamic(() => import("../components/dragable"), {
   ssr: false,
+  loading: LoadingWidget,
 });
 const TodoListMain = dynamic(() => import("../components/todoList/main"), {
   ssr: false,
+  loading: LoadingWidget,
 });
 const NoteMain = dynamic(() => import("../components/note/main"), {
   ssr: false,
+  loading: LoadingWidget,
 });
 const PomodoroMain = dynamic(() => import("../components/pomodoro/main"), {
   ssr: false,
+  loading: LoadingWidget,
 });
 const YoutubeMain = dynamic(() => import("../components/youtube/main"), {
   ssr: false,
+  loading: LoadingWidget,
 });
 const MusicInfoMain = dynamic(() => import("../components/musicInfo/main"), {
   ssr: false,
+  loading: LoadingWidget,
 });
 const ChangeWallpaperMain = dynamic(
   () => import("../components/changeWallpaper/main"),
   {
     ssr: false,
+    loading: LoadingWidget,
   }
 );
 
@@ -61,7 +69,7 @@ const ControlComponents = () => {
     );
   };
   return (
-    <div className="w-screen h-screen">
+    <div className="w-screen h-screen relative">
       {appTodoList.isShow && (
         <Dragable
           id="appTodoList"
